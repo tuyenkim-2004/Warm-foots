@@ -1,0 +1,91 @@
+body {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2019/11/15/766184/Anh3.jpg'); 
+    background-size: cover; 
+    background-position: center; /
+  
+}
+
+.container {
+    width: 100%;
+    max-width: 500px; 
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: hidden; 
+    opacity: 0.7;
+}
+
+
+.content {
+    flex: 1; 
+    padding: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    text-decoration: column;
+}
+
+.input-group {
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.form-control {
+    margin-top: 5px;
+    width:100%;
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #b8b2b2;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+   
+}
+
+.btn-primary {
+    background-color: #ae3f4f;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #ae3f4f;
+}
+
+.custom-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.custom-control label {
+    font-size: 0.9rem;
+    color: #007bff;
+    cursor: pointer;
+    text-align: center;
+}
+.form-group .custom-control {
+    text-align: center;
+}
