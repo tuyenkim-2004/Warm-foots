@@ -95,6 +95,17 @@
             </div>
         </div>
     </div>
+
+    <div class="banner-footer">
+            <img src="/public/imgs/banner-footer.png" alt="banner footer" class="banner-footer-image">
+            <div class="banner-footer-content">
+                <h4>Comfort Meets Fashion</h4>
+                <h1>Discover shoes that look great<br> and feel even better.</h1>
+                <p>Our collection features comfortable and stylish footwear designed to keep your feet happy all day long.
+                </p>
+                <a href="#" class="shop-now-btn">Shop now →</a>
+            </div>
+    </div>
      
     
   
