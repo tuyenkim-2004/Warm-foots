@@ -70,7 +70,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #be95be;
 }
 
 .input-icon {
@@ -99,6 +99,7 @@ body {
     width: 100%;
     border-radius: 5px;
     border: 1px solid #ccc;
+   
 }
 .input-icon {
     position: relative;
@@ -127,4 +128,6 @@ margin-right: 10px;;
 .custom-control {
     text-align: center; 
     margin-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
 }

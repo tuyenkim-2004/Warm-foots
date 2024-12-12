@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <div class="custom-control">
                         <span>New customer?</span>
-                        <a href="#" class="custom-control-link">Register</a>
+                        <a href="./register.php" class="custom-control-link">Register</a>
                     </div>
                 </div>
             </div>
