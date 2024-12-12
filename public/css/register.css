@@ -6,23 +6,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2019/11/15/766184/Anh3.jpg'); 
-    background-size: cover; 
-    background-position: center; /
   
 }
-
-.container {
+.container {    
     width: 100%;
-    max-width: 500px; 
+    border-radius: 10px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     display: flex;
     overflow: hidden; 
-    opacity: 0.7;
 }
-
+.frm {
+    margin-bottom: 15px;
+}
+.frm1{
+    display:flex;
+    gap:10px;
+ }
 
 .content {
     flex: 1; 
@@ -34,7 +35,7 @@ body {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     display: flex;
     text-decoration: column;
 }
@@ -42,7 +43,6 @@ body {
 .input-group {
     align-items: center;
     margin-bottom: 10px;
-    margin-left: 10px;
 }
 .form-control {
     margin-top: 5px;
@@ -61,7 +61,7 @@ body {
     background-color: #ae3f4f;
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -73,19 +73,58 @@ body {
     background-color: #ae3f4f;
 }
 
-.custom-control {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+.input-icon {
+    position: relative;
 }
 
-.custom-control label {
-    font-size: 0.9rem;
-    color: #007bff;
-    cursor: pointer;
-    text-align: center;
+.input-icon input {
+    padding-left: 30px; 
 }
-.form-group .custom-control {
-    text-align: center;
+
+.input-icon i {
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa; 
+}
+
+
+
+
+.input-group {
+    width: 100%;
+}
+.form-control {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.input-icon {
+    position: relative;
+}
+.input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+.password-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; 
+}
+.contain{
+margin-right: 10px;;
+}
+.contain:last-child{
+    margin-right: 0px;;
+}
+.password-group .input-icon {
+    flex: 1; 
+}
+
+.custom-control {
+    text-align: center; 
+    margin-top: 15px;
 }
