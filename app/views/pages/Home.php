@@ -46,5 +46,57 @@
             </div>
         </div>  
     </div>
+
+    <div class="text">
+        <h3>THE LATEST TRENDS IN ATHLETIC FOOTWEAR</h3>
+        <h1>Sneaker & Kids</h1>
+    </div>
+
+    <div class="product-sells">
+       <div class="product-sell-item">
+            <div class="product-sell">
+                <img src="/public/imgs/giay4.png" alt="">
+                <div class="info-product">
+                        <div class="price">$25.00</div>
+                        <div class="name">Classic White Tennis Sneakers</div>
+                        <div class="branch">Sportyfeet</div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="product-sell-item">
+            <div class="product-sell">
+                <img src="/public/imgs/giay5.png" alt="">
+                <div class="info-product">
+                        <div class="price">$25.00</div>
+                        <div class="name">Classic Leather Sneakers</div>
+                        <div class="branch">UrbanStep</div>
+                </div>
+            </div>
+        </div>
+        <div class="product-sell-item">
+            <div class="product-sell">
+                <img src="/public/imgs/giay6.png" alt="">
+                <div class="info-product">
+                        <div class="price">$25.00</div>
+                        <div class="name">High-Top Canvas Sneakers</div>
+                        <div class="branch">TrendyFeet</div>
+                </div>
+            </div>
+        </div>
+        <div class="product-sell-item">
+            <div class="product-sell">
+                <img src="/public/imgs/giay7.png" alt="">
+                <div class="info-product">
+                        <div class="price">$25.00</div>
+                        <div class="name">Breathable Mesh Slip-Ons</div>
+                        <div class="branch">AirWalk</div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+    
+  
 </body>
 </html>

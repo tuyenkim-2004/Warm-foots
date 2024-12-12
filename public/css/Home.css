@@ -72,6 +72,7 @@ body {
     margin-left: 150px ;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    height: 350px;
 }
   .text-overlay {
     top: -30%;
@@ -86,4 +87,48 @@ body {
     object-fit: cover;
     width: 100%;
     height: 100%;
+  }
+
+  .text {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .product-sells {
+    display: flex;
+    justify-content: space-between;
+    padding: 200px;
+    margin-top: -150px;
+  }
+
+  .product-sell {
+    text-align: left;
+    padding: 10px; 
+    margin: 5px;
+
+  }
+  
+  .product-sell-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .info-product {
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+  }
+  
+  .info-product .price {
+    font-weight:bold;
+    margin-bottom: 5px;
+  }
+
+  .info-product .name {
+    font-weight:normal;
+    margin-bottom: 5px;
+  }
+
+  .info-product .branch {
+    font-weight: normal;
   }
