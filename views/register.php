@@ -52,7 +52,7 @@
                 <button type="submit" name="login" class="btn-primary">Login</button>
                 <div class="custom-control">
                     <label for="">Already have an account?</label>
-                    <label class="custom-control-label">Login</label>
+                    <a href="#" class="custom-control-link">Login</a>
                 </div>
             </div>
         </div>
