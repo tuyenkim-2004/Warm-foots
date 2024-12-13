@@ -2,10 +2,12 @@
 require_once './app/models/UserModel.php';
 class AuthController extends Controller
 {
+
     public function index()
     {
         $this->register();
     }
+    
     public function register()
     {
 
@@ -28,6 +30,7 @@ class AuthController extends Controller
             }
             $userModel = $this->model('UserModel');
             $result = $userModel->registerUser($name, $password, $email);
+            print_r($result);
             
             if ($result) {
                 header('Location: login');
@@ -41,6 +44,7 @@ class AuthController extends Controller
         }
     }
 
+   
 
     public function login()
     {
@@ -50,7 +54,7 @@ class AuthController extends Controller
 
             $UserModel = $this->model('UserModel');
             $result = $UserModel->loginUser($email);
-            
+
             if ($result) {
                 $user = mysqli_fetch_assoc($result);
 
@@ -58,9 +62,9 @@ class AuthController extends Controller
                     $_SESSION['user'] = $user;
 
                     if ($user['role_id'] == 2) {
-                        header("Location: LayoutUser/index"); 
+                        header("Location: LayoutUser/index"); // Trang người dùng
                     } else {
-                        header("Location: layouts/LayoutAdmin");
+                        header("Location: layouts/LayoutAdmin"); // Trang admin
                     }
                     exit; 
                 } else {
