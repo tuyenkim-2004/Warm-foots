@@ -1,7 +1,35 @@
-<form action="">
-    <h3>Dang nhap</h3>
-    <input type="text">
-    <input type="email" name="email" placeholder="Enter your Email">
-    <input type="password" name="password" placeholder="Enter your password">
-    <button type="submit">login</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/Warm-foots/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="public/css/login.css">
+</head>
+
+<body>
+    <form action="AuthController/login" class="container">
+        <div class="tittle">
+            <h2 class="text-center">Login</h2>
+            <label for="email">Email:</label>
+            <div class="form-group">
+                <input type="email" id="email" class="form-control" name="email" placeholder="Nhập email" required />
+            </div>
+            <label for="password">Password:</label>
+            <div class="form-group">
+                <input type="password" id="password" class="form-control" name="password" placeholder="Nhập mật khẩu" required />
+            </div>
+            <button type="submit" name="login" class="btn-primary">Login</button>
+            <div class="form-group">
+                <div class="custom-control">
+                    <span>New customer?</span>
+                    <a href="user/Register" class="custom-control-link">Register</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

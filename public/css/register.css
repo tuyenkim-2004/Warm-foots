@@ -1,0 +1,133 @@
+body {
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+.container {    
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: hidden; 
+}
+.frm {
+    margin-bottom: 15px;
+}
+.frm1{
+    display:flex;
+    gap:10px;
+ }
+
+.content {
+    flex: 1; 
+    padding: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 5px;
+    display: flex;
+    text-decoration: column;
+}
+
+.input-group {
+    align-items: center;
+    margin-bottom: 10px;
+}
+.form-control {
+    margin-top: 5px;
+    width:100%;
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #b8b2b2;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+   
+}
+
+.btn-primary {
+    background-color: #ae3f4f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #be95be;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon input {
+    padding-left: 30px; 
+}
+
+.input-icon i {
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa; 
+}
+
+
+
+
+.input-group {
+    width: 100%;
+}
+.form-control {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+   
+}
+.input-icon {
+    position: relative;
+}
+.input-icon i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+.password-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px; 
+}
+.contain{
+margin-right: 10px;;
+}
+.contain:last-child{
+    margin-right: 0px;;
+}
+.password-group .input-icon {
+    flex: 1; 
+}
+
+.custom-control {
+    text-align: center; 
+    margin-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
