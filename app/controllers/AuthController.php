@@ -2,7 +2,10 @@
 require_once './app/models/UserModel.php';
 class AuthController extends Controller
 {
-    
+    public function index()
+    {
+        $this->register();
+    }
     public function register()
     {
 
@@ -25,7 +28,6 @@ class AuthController extends Controller
             }
             $userModel = $this->model('UserModel');
             $result = $userModel->registerUser($name, $password, $email);
-            print_r($result);
             
             if ($result) {
                 header('Location: login');
@@ -39,14 +41,36 @@ class AuthController extends Controller
         }
     }
 
-    public function index()
-    {
-        $this->register();
-    }
 
     public function login()
     {
-        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = isset($_POST['email']) ? $_POST['email'] : '';
+            $password = isset($_POST['password']) ? $_POST['password'] : '';
+
+            $UserModel = $this->model('UserModel');
+            $result = $UserModel->loginUser($email);
+            
+            if ($result) {
+                $user = mysqli_fetch_assoc($result);
+
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['user'] = $user;
+
+                    if ($user['role_id'] == 2) {
+                        header("Location: LayoutUser/index"); 
+                    } else {
+                        header("Location: layouts/LayoutAdmin");
+                    }
+                    exit; 
+                } else {
+                    $error = "Email hoặc mật khẩu không đúng.";
+                }
+            } else {
+                $error = "Email hoặc mật khẩu không đúng.";
+            }
+        }
+
         $this->view('user/Login');
     }
 }

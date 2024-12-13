@@ -56,7 +56,7 @@
                 <button type="submit" name="login" class="btn-primary">Register</button>
                 <div class="custom-control">
                     <label for="">Already have an account?</label>
-                    <a href="user/Login" class="custom-control-link">Login</a>
+                    <a href="AuthController/login" class="custom-control-link">Login</a>
                 </div>
             </div>
         </div>

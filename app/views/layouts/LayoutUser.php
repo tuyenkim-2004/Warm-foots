@@ -1,5 +1,5 @@
-<ul>
-    <li><a href="/user/HomeController">Home</a></li>
-    <li><a href="">Login</a></li>
-    <li><a href="/user/register">Register</a></li>
-</ul>
+<?php
+    require_once './components/header.php';
+    require_once './app/views/user/Home.php';
+    require_once './components/footer.php';
+?>

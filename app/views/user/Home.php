@@ -3,7 +3,6 @@
 
 <head>
     <base href="/Warm-foots/">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -11,6 +10,7 @@
 </head>
 
 <body>
+  
     <div class="banner">
         <img src="public/imgs/slider1.png" alt="Shoe" class="banner-image">
         <div class="banner-content">
@@ -108,7 +108,6 @@
             <a href="#" class="shop-now-btn">Shop now →</a>
         </div>
     </div>
-
 
 
 </body>

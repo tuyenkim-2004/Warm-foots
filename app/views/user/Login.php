@@ -25,7 +25,7 @@
             <div class="form-group">
                 <div class="custom-control">
                     <span>New customer?</span>
-                    <a href="user/Register" class="custom-control-link">Register</a>
+                    <a href="AuthController/register" class="custom-control-link">Register</a>
                 </div>
             </div>
         </div>
