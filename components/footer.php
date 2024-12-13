@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <base href="/Warm-foots/">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/public/css/footer.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="public/css/footer.css">
+  <title>header</title>
 
 <body>
   <footer class="footer">
@@ -21,7 +24,7 @@
       <div>
         <h4>INFORMATION</h4>
         <ul>
-          <li><a href="#">About Us</a></li>
+          <li><a href="?">About Us</a></li>
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Return Policy</a></li>
           <li><a href="#">Shipping Policy</a></li>
@@ -39,7 +42,7 @@
         </ul>
       </div>
       <div class="contact-info">
-        <img src="../public/imgs/logo.png" alt="logo-footer">
+        <img src="public/imgs/logo.png" alt="logo-footer">
         <p>T: 0387600582</p>
         <p>E: phongtran@gmail.com</p>
         <p>Hoa Phong, Hoa Vang</p>
@@ -68,4 +71,5 @@
     </div>
   </footer>
 </body>
+
 </html>

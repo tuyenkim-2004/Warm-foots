@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <base href="/Warm-foots/">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <title>Register</title>
-    <link rel="stylesheet" href="../public/css/register.css"> 
+    <link rel="stylesheet" href="public/css/register.css">
 
 </head>
+
 <body>
-    <form action="../controllers/AuthController.php" method="POST">
+    <form action="AuthController/register" method="POST">
         <div class="container">
             <div class="content">
                 <h2 class="text-center">Register</h2>
@@ -30,32 +34,33 @@
                     </div>
                 </div>
                 <div class="form-group">
-                <div class="contain">
-                    <span>Nhập mật khẩu:</span>
-                    <div class="password-group">
-                        <div class="input-icon mb-3">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required />
-                            <i class="fa-solid fa-key"></i>
+                    <div class="contain">
+                        <span>Nhập mật khẩu:</span>
+                        <div class="password-group">
+                            <div class="input-icon mb-3">
+                                <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu" required />
+                                <i class="fa-solid fa-key"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="contain">
+                    <div class="contain">
                         <span>Nhập lại mật khẩu:</span>
                         <div class="password-group">
                             <div class="input-icon mb-3">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required />
+                                <input type="password" class="form-control" id="password-confirm" name="confirm_password" placeholder="Nhập lai mật khẩu" required />
                                 <i class="fa-solid fa-key"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" name="login" class="btn-primary">Login</button>
+                <button type="submit" name="login" class="btn-primary">Register</button>
                 <div class="custom-control">
                     <label for="">Already have an account?</label>
-                    <a href="./login.php" class="custom-control-link">Login</a>
+                    <a href="AuthController/login" class="custom-control-link">Login</a>
                 </div>
             </div>
         </div>
     </form>
 </body>
+
 </html>
