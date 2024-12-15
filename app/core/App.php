@@ -18,7 +18,7 @@ class App
         require_once "./app/controllers/" . $this->controller . ".php";
         $this->controller = new $this->controller;
 
-        if (isset($arr[1])) {
+        if (isset($arr[1])) {                                                           
             if (method_exists($this->controller, $arr[1])) {
                 $this->action = $arr[1];
             }
