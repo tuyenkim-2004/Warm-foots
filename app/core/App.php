@@ -2,8 +2,8 @@
 class App
 {
 
-    protected $controller = "LayoutUser";
-    protected $action = "index";
+    protected $controller = "Home";
+    protected $action = "index"; 
     protected $params = [];
 
     function __construct()

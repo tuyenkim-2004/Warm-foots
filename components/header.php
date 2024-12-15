@@ -12,14 +12,14 @@
 
 <body>
   <header class="header">
-    
+
     <div class="navbar">
       <div class="logo">
         <img src="public/imgs/logo.png" alt="shoe" class="logo-icon">
       </div>
       <nav>
         <ul class="nav-menu">
-          <li><a href="HomeController/index">HOME</a></li>
+          <li><a href="Home">HOME</a></li>
           <li><a href="#">SHOP</a></li>
           <li><a href="#">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
@@ -29,7 +29,7 @@
       <div class="icons">
         <a href="#"><i class="fa fa-search"></i></a>
         <a href="#"><i class="fa fa-shopping-cart"></i></a>
-        <a href="AuthController/register"><i class="fa fa-user"></i></a>
+        <a href="./Authentication/register"><i class="fa fa-user"></i></a>
       </div>
   </header>
 </body>
