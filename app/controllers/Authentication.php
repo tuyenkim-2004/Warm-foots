@@ -1,6 +1,6 @@
 <?php
 require_once './app/models/UserModel.php';
-class AuthController extends Controller
+class Authentication extends Controller
 {
 
     public function index()
@@ -31,7 +31,7 @@ class AuthController extends Controller
             $userModel = $this->model('UserModel');
             $result = $userModel->registerUser($name, $password, $email);
             print_r($result);
-            
+
             if ($result) {
                 header('Location: login');
                 exit;
@@ -40,8 +40,11 @@ class AuthController extends Controller
                 $this->view('user/Register', ['error' => $error]);
             }
         } else {
-            $this->view('user/Register');
+            $this->view('LayoutUser',[
+                "user" => 'Register'
+            ]);
         }
+
     }
 
    
@@ -54,27 +57,39 @@ class AuthController extends Controller
 
             $UserModel = $this->model('UserModel');
             $result = $UserModel->loginUser($email);
-
-            if ($result) {
-                $user = mysqli_fetch_assoc($result);
-
-                if (password_verify($password, $user['password'])) {
-                    $_SESSION['user'] = $user;
-
-                    if ($user['role_id'] == 2) {
-                        header("Location: LayoutUser/index"); // Trang người dùng
-                    } else {
-                        header("Location: layouts/LayoutAdmin"); // Trang admin
+            $user = mysqli_fetch_assoc($result);
+            if ($user) {
+            
+            if($user['password']== $password)
+            {
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['login-time'] = time();
+                $_SESSION['users']= $user;
+                    switch ($user['role_id']) {
+                        case 2: // RoleID: Doctor
+                            $this->view('LayoutUser',[
+                                'user' => 'Home' 
+                            ]);
+                            break;
+                        default: // RoleID: Admin hoặc các vai trò khác
+                            $this->view("LayoutAdmin", [
+                                'admin' => 'products/index'
+                            ]);
+                            break;
                     }
-                    exit; 
-                } else {
-                    $error = "Email hoặc mật khẩu không đúng.";
-                }
-            } else {
-                $error = "Email hoặc mật khẩu không đúng.";
+            }
+            else{
+                $this->view('LayoutUser', [
+                    'user' => 'Login'
+                ]);
             }
         }
-
-        $this->view('user/Login');
+        }else
+        {
+            $this->view('LayoutUser', [
+                "user" => "Login"
+            ]);
+        }
     }
+    
 }

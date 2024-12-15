@@ -9,8 +9,10 @@
   <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time() ?>">
   <title>Document</title>
   <style>
-    .active{display: block;}
-</style>
+    .active {
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
