@@ -32,7 +32,7 @@
       </nav>
       <div class="icons">
         <a href="#"><i class="fa fa-search"></i></a>
-        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        <a href="ShoppingCart/index"><i class="fa fa-shopping-cart"></i></a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle userButton">
             <i class="fa fa-user"></i>

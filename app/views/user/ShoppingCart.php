@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/Warm-foots/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="/public/css/ShoppingCart.css">
+    <link rel="stylesheet" href="public/css/ShoppingCart.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -24,7 +25,7 @@
                     <tr>
                     <td>
                         <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
+                            <img src="public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
                             <div class="info-detail-order">
                                 <div class="name">Premium Leather Chelsea Boots</div>
                                 <i class="fas fa-trash icon-delete"></i>
@@ -46,7 +47,7 @@
                     <tr>
                     <td>
                         <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
+                            <img src="public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
                             <div class="info-detail-order">
                                 <div class="name">Premium Leather Chelsea Boots</div>
                                 <i class="fas fa-trash icon-delete"></i>
@@ -68,7 +69,7 @@
                     <tr>
                     <td>
                         <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
+                            <img src="public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
                             <div class="info-detail-order">
                                 <div class="name">Premium Leather Chelsea Boots</div>
                                 <i class="fas fa-trash icon-delete"></i>
@@ -90,7 +91,7 @@
                     <tr>
                     <td>
                         <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
+                            <img src="public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
                             <div class="info-detail-order">
                                 <div class="name">Premium Leather Chelsea Boots</div>
                                 <i class="fas fa-trash icon-delete"></i>
@@ -126,6 +127,6 @@
             </div>
         </div>
    </div>
-    <script src="/public/js/ShoppingCart.js"></script>
+    <script src="public/js/ShoppingCart.js"></script>
 </body>
 </html>
