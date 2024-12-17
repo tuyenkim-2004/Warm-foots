@@ -1,7 +1,14 @@
+body{
+     font-family: 'Manrope', sans-serif;
+}
+
 .container{
     margin-top: 50px;
     margin-left: 100px;
     margin-right: 100px;
+}
+.content{
+    
     display: flex;
     gap: 50px;
 }
@@ -13,6 +20,135 @@
 .left>img{
     width: 100%;
     object-fit: contain;
+   
+}
+.right{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
 }
 
+.name-title{
+    font-weight: 700;
+    font-size: 36px;
+}
 
+.plan{
+    font-size: 24px;
+}
+
+.size-title{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.size-detail{
+    display: flex;
+    gap: 20px;
+}
+.size-detail-item{
+    width: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:  2px solid #cecdcd;
+    color: black;
+}
+.action{
+    display: flex;
+    gap: 30px;
+}
+.quantity-controls{
+    display: flex;
+    border: 2px solid #e7e7e7;
+}
+
+#decrease ,#increase, #quantity{
+    width: 45px;
+    height: 50px;
+    padding-block: 0;
+    padding-inline: 0;
+    border: none;
+}
+
+ #quantity{
+    text-align: center;
+ }
+
+ .cart{
+    width: 241px;
+    background-color: #ae3f4f;
+    border: none;
+    height: 50px;
+    font-size: 14px;
+    color: white;
+ }
+ .checkout{
+    width: 241px;
+    height: 50px;
+    border: none;
+    background-color: black;
+    color: white;
+ }
+ .type-for-product{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+ }
+ .vendor, .type, .sku, .available{
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    font-weight: 400;
+ }
+ .vendor>.title, .type>.title, .sku>.title, .available>.title{
+    color: #6f6e6e;
+ }
+
+
+ .shipping-infomation{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+ }
+
+  .shipping-infomation>.title{
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
+  }
+
+  .info-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #6f6e6e;
+    font-size: 14px;
+  }
+
+  .description{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-des{
+    width: 80%;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-self: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .info-des>.title{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .des-detail{
+    color: #535151;
+  }
