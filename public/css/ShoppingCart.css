@@ -1,0 +1,165 @@
+body{
+     font-family: 'Manrope', sans-serif;
+}
+
+.container{
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+h2{
+    padding: 0;
+}
+.content{
+    display: flex;
+    gap: 30px;
+}
+
+
+table{
+    width: 70%;
+}
+
+table {
+    width: 100%; /* Đảm bảo bảng có chiều rộng 100% */
+    border-collapse: collapse; /* Để loại bỏ khoảng cách giữa các ô */
+}
+
+thead {
+    display: table; /* Đảm bảo thead giữ định dạng bảng */
+    width: 100%; /* Đảm bảo thead có chiều rộng 100% */
+    table-layout: fixed; /* Cố định chiều rộng cột */
+}
+
+tbody {
+    display: block; /* Để có thể sử dụng overflow */
+    max-height: 400px; /* Chiều cao tối đa cho tbody */
+    overflow-y: auto; /* Bật thanh cuộn dọc */
+    width: 100%; /* Đảm bảo tbody có chiều rộng 100% */
+}
+
+tbody tr {
+    display: table; /* Đảm bảo các hàng vẫn giữ dạng bảng */
+    width: 100%; /* Đảm bảo độ rộng là 100% */
+    table-layout: fixed; /* Cố định chiều rộng cột */
+}
+
+thead>tr>th{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+tr>td{
+    border-bottom: 1px solid #cbc9c9;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.image-product{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.infor-product-order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-detail-order{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-detail-order>.name{
+    font-size: 16px;
+    font-weight: 400;
+    color: #858282;
+}
+
+.icon-delete{
+    color: red;
+}
+.quantity-controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#decrease ,#increase, #quantity{
+    width: 35px;
+    height: 45px;
+    padding-block: 0;
+    padding-inline: 0;
+    border: none;
+    text-align: center;
+
+}
+
+#decrease #increase{
+    border: 2px solid #e7e7e7;
+
+}
+
+.price{
+    display: flex;
+    align-items:  center;
+    justify-content: center;
+}
+
+.info-total-order{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 30%;
+}
+
+.order{
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+.total-detail, .action{
+    display: flex;
+    justify-content: space-between;
+}
+
+.total{
+    font-size: 20px;
+    font-weight: 500;
+    color: #403f3f;
+}
+
+.back{
+    height: 40px;
+    width: 180px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.back a{
+    text-decoration: none;
+    color: #ae3f4f;
+
+}
+
+.checkout{
+    height: 40px;
+    width: 160px;
+    border: none;
+    background-color: #ae3f4f;
+    color: white;
+    border-radius: 5px;
+}
+
+.checkout a{
+    color: white;
+    text-decoration: none;
+}
