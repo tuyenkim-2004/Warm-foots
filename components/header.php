@@ -23,7 +23,7 @@
       </div>
       <nav>
         <ul class="nav-menu">
-          <li><a href="HomeController/index">HOME</a></li>
+          <li><a href="Home/index">HOME</a></li>
           <li><a href="#">SHOP</a></li>
           <li><a href="#">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
