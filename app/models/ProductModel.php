@@ -6,16 +6,14 @@ class ProductModel extends Database
     public function getProductList()
     {
         $results = $this->query("SELECT * FROM products");
-        
-        // Kiểm tra nếu có lỗi trong câu truy vấn
         if (!$results) {
-            return []; // Trả về mảng rỗng nếu không có kết quả hoặc có lỗi
+            return []; 
         }
     
         // Lấy tất cả các hàng
         $productList = [];
         while ($row = $this->fetch($results)) {
-            $productList[] = $row; // Sử dụng cú pháp ngắn để thêm phần tử vào mảng
+            $productList[] = $row; 
         }
         
         return $productList;
@@ -26,7 +24,7 @@ class ProductModel extends Database
     {
         $results = $this->query("SELECT * FROM products LIMIT 3");
         if (!$results) {
-            return []; // Trả về mảng rỗng nếu không có kết quả
+            return []; 
         }
 
         $productList = [];
@@ -83,7 +81,7 @@ class ProductModel extends Database
     public function countProduct()
     {
         $result = $this->query("SELECT COUNT(*) as count FROM products");
-        return $result ? $result->fetch_assoc()["count"] : 0; // Trả về 0 nếu không có kết quả
+        return $result ? $result->fetch_assoc()["count"] : 0; 
     }
 }
 ?>
