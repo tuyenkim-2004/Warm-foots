@@ -25,7 +25,7 @@
         <ul class="nav-menu">
           <li><a href="Home/index">HOME</a></li>
           <li><a href="#">SHOP</a></li>
-          <li><a href="#">PRODUCTS</a></li>
+          <li><a href="Products/index">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
           <li><a href="#">ABOUT US</a></li>
         </ul>

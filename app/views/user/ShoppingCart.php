@@ -126,6 +126,7 @@
             </div>
         </div>
    </div>
+   <a href="/public/imgs/LuxuryLeatherShoes/WaterproofBoots.webp"></a>
     <script src="/public/js/ShoppingCart.js"></script>
 </body>
 </html>

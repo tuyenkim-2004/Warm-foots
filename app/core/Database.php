@@ -5,8 +5,8 @@
     public $con;
     protected $servername = "localhost";
     protected $username = "root";
-    protected $password = "1234";
-
+    // protected $password = "1234";
+    protected $password = "";
     protected $dbname = "warm-foots";
 
     public function __construct()
