@@ -6,10 +6,6 @@
             $this->view('LayoutUser', [
                 "user" => "ShoppingCart"
             ]);
-            
         }
-
-        
-        
     }
 ?>

@@ -41,6 +41,7 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Log in</a></li>
             <li><a href="#">Log out</a></li>
+             <li><a href="Authentication/register">Register</a></li>
           </ul>
         </div>
       </div>
