@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form action="AuthController/login" class="container">
+    <form action="./AuthController/login" class="container" method="post">
         <div class="tittle">
             <h2 class="text-center">Login</h2>
             <label for="email">Email:</label>
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <div class="custom-control">
                     <span>New customer?</span>
-                    <a href="AuthController/register" class="custom-control-link">Register</a>
+                    <a href="./Authentication/register" class="custom-control-link">Register</a>
                 </div>
             </div>
         </div>
