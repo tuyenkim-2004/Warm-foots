@@ -7,6 +7,7 @@ class Products extends Controller {
 
         $productlist = $this->model("ProductModel")->getProductList();
 
+        
         $this->view("LayoutUser", [
             "user" => "Products",
             "productList" => $productlist
