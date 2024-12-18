@@ -30,7 +30,6 @@ class Authentication extends Controller
             }
             $userModel = $this->model('UserModel');
             $result = $userModel->registerUser($name, $password, $email);
-            print_r($result);
 
             if ($result) {
                 header('Location: login');

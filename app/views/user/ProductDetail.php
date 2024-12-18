@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/ProductDetail.css">
+    <link rel="stylesheet" href="public/css/ProductDetail.css">
 </head>
 
 <body>
    <div class="container">
          <div class="content">
             <div class="left">
-                <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product">
+                <img src="public/imgs/AthleticFootwear/BreathableMeshSlip-Ons.webp" alt="image product">
             </div>
             <div class="right">
                 <div class="name-title">Premium Leather Chelsea Boots</div>
@@ -70,7 +70,7 @@
             </div>
         </div>
    </div>
-    <script src="/public/js/ProductDetail.js"></script>
+    <script src="public/js/ProductDetail.js"></script>
 </body>
 
 </html>
