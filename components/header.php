@@ -39,7 +39,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Log in</a></li>
+            <li><a href="Authentication/login">Log in</a></li>
             <li><a href="#">Log out</a></li>
              <li><a href="Authentication/register">Register</a></li>
           </ul>

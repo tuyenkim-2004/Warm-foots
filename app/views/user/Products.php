@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
 <base href="/Warm-foots/">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
     <link rel="stylesheet" href="public/css/Products.css">
 </head>
 <body>
-    <form action="">
+    <form action="add_to_cart.php" method="POST">
         <div class="container">
             <a href ="" title ="home">Home</a>
             <span aria-hidden="true">/</span>
@@ -101,9 +100,15 @@
                                 <span class="brand text-muted"><?php echo htmlspecialchars($product['brand']); ?></span>
                             </div>
                             <div class="submit">
-                                <button class="add-to-cart">Add to Cart</button>
+                                <form method="POST" action="add_to_cart.php">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                    <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                    <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+                                    <input type="hidden" name="quantity" value="1"> 
+                                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                                </form>
                                 <button class="buy-now">Buy Now</button>
-                            </div>
+                            </div>  
                         </div>
                 <?php endforeach; ?>
             </div>
