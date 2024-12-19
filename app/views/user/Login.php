@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form action="./AuthController/login" class="container" method="post">
+    <form action="./Authentication/login" class="container" method="post">
         <div class="tittle">
             <h2 class="text-center">Login</h2>
             <label for="email">Email:</label>
@@ -30,6 +30,7 @@
             </div>
         </div>
     </form>
+
 </body>
 
 </html>

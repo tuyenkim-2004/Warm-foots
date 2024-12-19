@@ -57,7 +57,13 @@ class Authentication extends Controller
             $UserModel = $this->model('UserModel');
             $result = $UserModel->loginUser($email);
             $user = mysqli_fetch_assoc($result);
+            var_dump($user);
+
+
+
             if ($user) {
+                // $_SESSION['user_id'] = $user['user_id'];
+
             
             if($user['password']== $password)
             {
@@ -65,12 +71,12 @@ class Authentication extends Controller
                 $_SESSION['login-time'] = time();
                 $_SESSION['users']= $user;
                     switch ($user['role_id']) {
-                        case 2: // RoleID: Doctor
+                        case 2: 
                             $this->view('LayoutUser',[
                                 'user' => 'Home' 
                             ]);
                             break;
-                        default: // RoleID: Admin hoặc các vai trò khác
+                        default: 
                             $this->view("LayoutAdmin", [
                                 'admin' => 'products/index'
                             ]);
