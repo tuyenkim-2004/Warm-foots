@@ -57,8 +57,6 @@ class Authentication extends Controller
             $UserModel = $this->model('UserModel');
             $result = $UserModel->loginUser($email);
             $user = mysqli_fetch_assoc($result);
-            var_dump($user);
-
 
 
             if ($user) {

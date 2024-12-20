@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="public/css/Products.css">
 </head>
 <body>
-    <form action="add_to_cart.php" method="POST">
         <div class="container">
             <a href ="" title ="home">Home</a>
             <span aria-hidden="true">/</span>
@@ -100,7 +99,7 @@
                                 <span class="brand text-muted"><?php echo htmlspecialchars($product['brand']); ?></span>
                             </div>
                             <div class="submit">
-                                <form method="POST" action="add_to_cart.php">
+                                <form method="POST" action="./ShoppingCart/addToCart">
                                     <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
                                     <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">
                                     <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
@@ -113,6 +112,5 @@
                 <?php endforeach; ?>
             </div>
         </div>
-    </form>
 </body>
 </html>

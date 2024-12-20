@@ -1,48 +1,27 @@
 <?php
+require_once './app/models/CartModel.php';
 
 class ShoppingCart extends Controller {
-    private $ShoppingCartModel;
+    public function addToCart() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump($_POST['product_id']);
+            // Lấy product_id và quantity từ POST
+            $productId = intval($_POST['product_id']);
+            $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1; // Mặc định quantity là 1
 
-    public function __construct($ShoppingCartModel) {
-        $this->ShoppingCartModel = $ShoppingCartModel;
-    }
+            // Khởi tạo model
+            $CartModel = $this->model('CartModel');
+            // Gọi phương thức addProductToCart từ model
+            $result = $CartModel->addProductToCart($productId, $quantity);
 
-    public function index() {
-        $this->view('LayoutUser', [
-            "user" => "ShoppingCart",
-            "cartItems" => $this->getCartItems()
-        ]);
-    }
-
-    public function createOrder() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
-            session_start();
-            if (isset($_SESSION['user_id'])) {
-                $productId = $_POST['product_id']; // Get product ID from POST request
-                $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default quantity to 1
-
-                // Add product to cart
-                $result = $this->ShoppingCartModel->addProductToCart($productId, $quantity);
-                
-                if ($result) {
-                    return "Product added to cart successfully."; // Success message
-                } else {
-                    return "Failed to add product to cart."; // Error message
-                }
+            if ($result) {
+                echo "Sản phẩm đã được thêm vào giỏ hàng!";
             } else {
-                return "User not logged in."; // Error message for unauthenticated users
+                echo "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.";
             }
         } else {
-            $this->index();
+            echo "Yêu cầu không hợp lệ.";
         }
-    }
-
-    private function getCartItems() {
-        session_start();
-        if (isset($_SESSION['user_id'])) {
-            return $this->ShoppingCartModel->getCartItems($_SESSION['user_id']);
-        }
-        return [];
     }
 }
 ?>
