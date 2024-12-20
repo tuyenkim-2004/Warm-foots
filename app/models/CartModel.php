@@ -119,5 +119,34 @@ class CartModel extends Database {
             return null; // Không tìm thấy cart ID
         }
     }
+
+    public function getCartDetails() {
+        if (!isset($_SESSION['user_id'])) {
+            return []; // Nếu người dùng chưa đăng nhập, trả về mảng rỗng
+        }
+    
+        $userId = $_SESSION['user_id'];
+        $cartId = $this->getCartIdByUserId($userId);
+        if (!$cartId) {
+            return []; // Không tìm thấy giỏ hàng
+        }
+    
+        $stmt = $this->prepare("
+            SELECT cd.*, p.product_name, p.img_url, p.price 
+            FROM cart_details cd 
+            JOIN products p ON cd.product_id = p.product_id 
+            WHERE cd.cart_id = ?
+        ");
+        if (!$stmt) {
+            echo "Lỗi chuẩn bị câu lệnh: " . $this->con->error;
+            return [];
+        }
+        
+        $stmt->bind_param("i", $cartId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        return $result->fetch_all(MYSQLI_ASSOC); // Trả về tất cả các bản ghi dưới dạng mảng
+    }
 }
 ?>
