@@ -141,7 +141,7 @@ class CartModel extends Database {
             echo "Lỗi chuẩn bị câu lệnh: " . $this->con->error;
             return [];
         }
-        
+    
         $stmt->bind_param("i", $cartId);
         $stmt->execute();
         $result = $stmt->get_result();

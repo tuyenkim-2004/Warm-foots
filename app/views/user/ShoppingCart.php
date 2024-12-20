@@ -60,7 +60,7 @@
                 <div>Shipping Free</div>
                 <div class="total-detail">
                     <div>Total:</div>
-                    <div class="total">$654</div>
+                    <div class="total">$<?php echo  number_format($data['totalPrice'], 2) ?></div>
                 </div>
                 <div class="action">
                     <button class="back"><a href="#"><i class="fas fa-arrow-left"></i>   Continue Shopping</a></button>

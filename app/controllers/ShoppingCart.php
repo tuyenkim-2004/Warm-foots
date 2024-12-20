@@ -10,11 +10,19 @@ class ShoppingCart extends Controller {
         // Lấy thông tin chi tiết giỏ hàng
         $cartDetails = $cartModel->getCartDetails();
     
-        // Render view với dữ liệu giỏ hàng
+        // Tính tổng giá trị giỏ hàng
+        $totalPrice = 0;
+        foreach ($cartDetails as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+
+        // Render view với dữ liệu giỏ hàng và tổng giá trị
         $this->view('LayoutUser', [
             'user' => 'ShoppingCart',
-            'cartDetails' => $cartDetails // Truyền dữ liệu giỏ hàng vào view
+            'cartDetails' => $cartDetails, // Truyền dữ liệu giỏ hàng vào view
+            'totalPrice' => $totalPrice // Truyền tổng giá trị vào view
         ]);
+
     }
     public function addToCart() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {            

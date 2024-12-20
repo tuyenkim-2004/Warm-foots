@@ -6,7 +6,8 @@
         quantityInput.value = quantity;
     });
 
-    document.getElementById('decrease').addEventListener('click', () => {
+    document.querySelector('decrease').addEventListener('click', () => {
+        console.log("áddsad")
         if (quantity > 1) {
             quantity--;
             quantityInput.value = quantity;
