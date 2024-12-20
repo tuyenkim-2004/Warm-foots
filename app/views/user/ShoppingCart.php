@@ -70,6 +70,7 @@
         </div>
    </div>
    <a href="public/imgs/LuxuryLeatherShoes/WaterproofBoots.webp"></a>
-    <script src="public/js/ShoppingCart.js"></script>
+    <script src="public/js/ShoppingCart.js?v=<?php echo time(); ?>
+"></script>
 </body>
 </html>
