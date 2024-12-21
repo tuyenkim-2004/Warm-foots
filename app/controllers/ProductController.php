@@ -1,7 +1,7 @@
 
 <?php 
 require_once './app/models/ProductModel.php';
-class Products extends Controller {
+class ProductController extends Controller {
     function index(){
 
         $productlist = $this->model("ProductModel")->getProductList();
@@ -13,7 +13,7 @@ class Products extends Controller {
     }
     function detail() {
         $productID = $_GET['id'] ?? 0; 
-        $product = $this->model("DetailModel")->getProductDetails($productID);
+        $product = $this->model("ProductModel")->getProductDetails($productID);
         
         if (!$product) {
             die("Product not found");
@@ -25,7 +25,6 @@ class Products extends Controller {
     }
 
     public function FilterByCategory() {
-        // Lấy danh mục từ URL
         $category = $_GET['category_id'] ?? '';
         $productModel = $this->model("ProductModel");
         $products = $productModel->filterByCategory($category);

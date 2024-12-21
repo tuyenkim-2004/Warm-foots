@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/Warm-foots/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="/public/css/ShoppingCart.css">
+    <link rel="stylesheet" href="public/css/ShoppingCart.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -20,96 +21,38 @@
                         <th>Price</th>
                     </tr>
                 </thead>
-               <tbody class="tbody">
-                    <tr>
-                    <td>
-                        <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
-                            <div class="info-detail-order">
-                                <div class="name">Premium Leather Chelsea Boots</div>
-                                <i class="fas fa-trash icon-delete"></i>
-
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="quantity-controls">
-                            <button id="decrease">-</button>
-                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
-                            <button id="increase">+</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="price">$45</div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
-                        <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
-                            <div class="info-detail-order">
-                                <div class="name">Premium Leather Chelsea Boots</div>
-                                <i class="fas fa-trash icon-delete"></i>
-
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="quantity-controls">
-                            <button id="decrease">-</button>
-                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
-                            <button id="increase">+</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="price">$45</div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
-                        <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
-                            <div class="info-detail-order">
-                                <div class="name">Premium Leather Chelsea Boots</div>
-                                <i class="fas fa-trash icon-delete"></i>
-
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="quantity-controls">
-                            <button id="decrease">-</button>
-                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
-                            <button id="increase">+</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="price">$45</div>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
-                        <div class="infor-product-order">
-                            <img src="/public/imgs/Athletic Footwear/Classic Leather Sneakers.webp" alt="image product cart" class="image-product">
-                            <div class="info-detail-order">
-                                <div class="name">Premium Leather Chelsea Boots</div>
-                                <i class="fas fa-trash icon-delete"></i>
-
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="quantity-controls">
-                            <button id="decrease">-</button>
-                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
-                            <button id="increase">+</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="price">$45</div>
-                    </td>
-                    </tr>
-               </tbody>
+                <tbody class="tbody">
+                    <?php if (!empty($data['cartDetails'])): ?>
+                        <?php foreach ($data['cartDetails'] as $item): ?>
+                            <tr>
+                                <td>
+                                    <div class="infor-product-order">
+                                        <img src="public/imgs/<?php echo htmlspecialchars($item['img_url']); ?>.webp" 
+                                            alt="Hình sản phẩm" class="image-product">
+                                        <div class="info-detail-order">
+                                            <div class="name"><?php echo htmlspecialchars($item['product_name']); ?></div>
+                                            <i class="fas fa-trash icon-delete" title="Xóa sản phẩm"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                        <div class="quantity-controls">
+                                            <button id="decrease">-</button>
+                                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
+                                            <button id="increase">+</button>
+                                        </div>
+                                </td>
+                                <td>
+                                    <div class="price">$<?php echo number_format($item['price'], 2); ?></div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3" style="text-align: center;">Giỏ hàng của bạn trống.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
                 
             </table>
             <div class="info-total-order">
@@ -117,7 +60,7 @@
                 <div>Shipping Free</div>
                 <div class="total-detail">
                     <div>Total:</div>
-                    <div class="total">$654</div>
+                    <div class="total">$<?php echo  number_format($data['totalPrice'], 2) ?></div>
                 </div>
                 <div class="action">
                     <button class="back"><a href="#"><i class="fas fa-arrow-left"></i>   Continue Shopping</a></button>
@@ -126,7 +69,8 @@
             </div>
         </div>
    </div>
-   <a href="/public/imgs/LuxuryLeatherShoes/WaterproofBoots.webp"></a>
-    <script src="/public/js/ShoppingCart.js"></script>
+   <a href="public/imgs/LuxuryLeatherShoes/WaterproofBoots.webp"></a>
+    <script src="public/js/ShoppingCart.js?v=<?php echo time(); ?>
+"></script>
 </body>
 </html>

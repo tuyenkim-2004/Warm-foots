@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <form action="./Authentication/register" method="POST">
+    <form action="./AuthenticationController/register" method="POST">
         <div class="container">
             <div class="content">
                 <h2 class="text-center">Register</h2>
@@ -56,7 +56,7 @@
                 <button type="submit" name="login" class="btn-primary">Register</button>
                 <div class="custom-control">
                     <label for="">Already have an account?</label>
-                    <a href="./Authentication/login" class="custom-control-link">Login</a>
+                    <a href="./AuthenticationController/login" class="custom-control-link">Login</a>
                 </div>
             </div>
         </div>

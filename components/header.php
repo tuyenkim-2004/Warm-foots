@@ -23,24 +23,25 @@
       </div>
       <nav>
         <ul class="nav-menu">
-          <li><a href="Home/index">HOME</a></li>
+          <li><a href="HomeController/index">HOME</a></li>
           <li><a href="#">SHOP</a></li>
-          <li><a href="Products/index">PRODUCTS</a></li>
+          <li><a href="ProductController/index">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
           <li><a href="#">ABOUT US</a></li>
         </ul>
       </nav>
       <div class="icons">
         <a href="#"><i class="fa fa-search"></i></a>
-        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        <a href="ShoppingCartController/index"><i class="fa fa-shopping-cart"></i></a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle userButton">
             <i class="fa fa-user"></i>
           </a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Log in</a></li>
+            <li><a href="AuthenticationController/login">Log in</a></li>
             <li><a href="#">Log out</a></li>
+             <li><a href="AuthenticationController/register">Register</a></li>
           </ul>
         </div>
       </div>
