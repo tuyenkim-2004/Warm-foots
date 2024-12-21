@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="public/css/Products.css">
 </head>
 <body>
+    <?php
+    if (isset($_SESSION['message'])) {
+        echo '<div class="alert alert-success" style="text-align: center; color: green;">' . $_SESSION['message'] . '</div>';
+        unset($_SESSION['message']);
+    }
+    ?>
+
         <div class="container">
             <a href ="" title ="home">Home</a>
             <span aria-hidden="true">/</span>
@@ -22,12 +29,13 @@
         </div>
 
         <div class="categories">
-            <a href="#" class="category">Athletic Footwear </a>
-            <a href="#" class="category">Boots for Every Occasion </a>
-            <a href="#" class="category">Luxury Leather Shoes </a>
-            <a href="#" class="category">Sandals & Slides </a>
-            <a href="#" class="category">Sneakers Haven </a>
+            <a href="Products/FilterByCategory?category_id=1" class="category">Athletic Footwear</a>
+            <a href="Products/FilterByCategory?category_id=2" class="category">Boots for Every Occasion</a>
+            <a href="Products/FilterByCategory?category_id=3" class="category">Luxury Leather Shoes</a>
+            <a href="Products/FilterByCategory?category_id=4" class="category">Sandals & Slides</a>
+            <a href="Products/FilterByCategory?category_id=5" class="category">Sneakers Haven</a>
         </div>
+        
         
         <div class="category">
             <div class="from_group">
@@ -35,7 +43,7 @@
                     <img src="public/imgs/AthleticFootwear/slider.webp" alt="">
                 </div>
                 <div class="title">
-                    <a href="#"><span>Athletic Footwear</span></a>
+                    <a href="Products/FilterByCategory?category_id=1"><span>Athletic Footwear</span></a>
                 </div>
                 
             </div>
@@ -45,7 +53,7 @@
                     <img src="public/imgs/BootsforEveryOccasion/slider.webp" alt="">
                 </div>
                 <div class="title">
-                    <a href="#"><span> Boots for Every Occasion</span></a>
+                    <a href="Products/FilterByCategory?category_id=2" ><span> Boots for Every Occasion</span></a>
                 </div>
             </div>
 
@@ -54,7 +62,7 @@
                     <img src="public/imgs/LuxuryLeatherShoes/slider.webp" alt="">
                 </div>
                 <div class="title">
-                    <a href="#"><span>Luxury Leather Shoes</span></a>
+                    <a href="Products/FilterByCategory?category_id=3"><span>Luxury Leather Shoes</span></a>
                 </div>
             </div>
 
@@ -63,7 +71,7 @@
                     <img src="public/imgs/Sandals&Slides/slider.webp" alt="">
                 </div>
                 <div class="title">
-                    <a href="#"><span> Sandals & Slides</span></a>
+                    <a href="Products/FilterByCategory?category_id=4"><span> Sandals & Slides</span></a>
                 </div>
             </div>
 
@@ -72,7 +80,7 @@
                     <img src="public/imgs/SneakerheadsHaven/slider.webp" alt="">
                 </div>
                 <div class="title">
-                    <a href="#"><span> Sneakerhead's Haven</span></a>
+                    <a href="Products/FilterByCategory?category_id=5"><span> Sneakerhead's Haven</span></a>
                 </div>
             </div>
         </div>
@@ -87,7 +95,9 @@
                 <?php foreach ($data["productList"] as $product): ?>
                         <div class="product-card">
                             <div class="image">
-                            <img src="public/imgs/<?php echo htmlspecialchars($product['img_url']); ?>.webp" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                            <a href="Products/Detail?id=<?php echo $product['product_id']; ?>">
+                                <img src="public/imgs/<?php echo htmlspecialchars($product['img_url']); ?>.webp" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                            </a>
                             </div>
                             <div class="item_list">
                                 <span class="price text-success"><?php echo $product['price']; ?> USD</span>

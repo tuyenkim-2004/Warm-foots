@@ -50,49 +50,44 @@ class Authentication extends Controller
 
     public function login()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = isset($_POST['email']) ? $_POST['email'] : '';
-            $password = isset($_POST['password']) ? $_POST['password'] : '';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
 
-            $UserModel = $this->model('UserModel');
-            $result = $UserModel->loginUser($email);
-            $user = mysqli_fetch_assoc($result);
+        $UserModel = $this->model('UserModel');
+        $result = $UserModel->loginUser($email);
+        $user = mysqli_fetch_assoc($result);
 
-
-            if ($user) {
-                // $_SESSION['user_id'] = $user['user_id'];
-
-            
-            if($user['password']== $password)
-            {
+        if ($user) {  
+            if ($user['password'] == $password) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['login-time'] = time();
-                $_SESSION['users']= $user;
-                    switch ($user['role_id']) {
-                        case 2: 
-                            $this->view('LayoutUser',[
-                                'user' => 'Home' 
-                            ]);
-                            break;
-                        default: 
-                            $this->view("LayoutAdmin", [
-                                'admin' => 'products/index'
-                            ]);
-                            break;
-                    }
-            }
-            else{
+                $_SESSION['users'] = $user;
+                switch ($user['role_id']) {
+                    case 2: 
+                        header('Location: /Warm-foots/Home/index');
+                        exit(); // Dừng thực thi script
+                    default: 
+                        header('Location: /Warm-foots/Admin/products/index'); // Điều chỉnh nếu cần
+                        exit();
+                }
+            } else {
                 $this->view('LayoutUser', [
-                    'user' => 'Login'
+                    'user' => 'Login',
+                    'error' => 'Mật khẩu không đúng!'
                 ]);
             }
-        }
-        }else
-        {
+        } else {
             $this->view('LayoutUser', [
-                "user" => "Login"
+                'user' => 'Login',
+                'error' => 'Email không tồn tại!'
             ]);
         }
+    } else {
+        $this->view('LayoutUser', [
+            'user' => 'Login'
+        ]);
+    }
     }
     
 }

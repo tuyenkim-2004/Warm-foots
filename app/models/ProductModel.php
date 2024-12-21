@@ -83,5 +83,40 @@ class ProductModel extends Database
         $result = $this->query("SELECT COUNT(*) as count FROM products");
         return $result ? $result->fetch_assoc()["count"] : 0; 
     }
+    ///loc sản phẩm
+    public function filterByCategory($category_id) {
+        $sql = "SELECT * FROM products WHERE category_id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("s", $category_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Lấy danh sách sản phẩm
+        $products = [];
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+
+        return $products;
+    }
+
+
+    public function getProductDetails($productID) {
+        // Truy vấn SQL
+        $sql = "SELECT p.*, c.name AS name 
+                FROM products p
+                JOIN categories c ON p.category_id = c.category_id
+                WHERE p.product_id = ?";
+
+    
+        $stmt = $this->con->prepare($sql); 
+        if (!$stmt) {
+            die("Prepare failed: " . $this->con->error);
+        }
+        $stmt->bind_param("i", $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
 }
 ?>

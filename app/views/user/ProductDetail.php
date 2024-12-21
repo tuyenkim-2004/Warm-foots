@@ -11,20 +11,25 @@
 </head>
 
 <body>
-   <div class="container">
-         <div class="content">
+    <div class="container">
+    <div class="content">
+        <?php if (!empty($data["product"])): ?>
             <div class="left">
-                <img src="public/imgs/AthleticFootwear/BreathableMeshSlip-Ons.webp" alt="image product">
+                <img src="public/imgs/<?php echo htmlspecialchars($data["product"]['img_url'] ?? 'default.jpg'); ?>.webp" 
+                     alt="<?php echo htmlspecialchars($data["product"]['product_name'] ?? 'Product Image'); ?>">
             </div>
             <div class="right">
-                <div class="name-title">Premium Leather Chelsea Boots</div>
-                <div class="plan">$25.00</div>
+                <div class="name-title"><?php echo htmlspecialchars($data["product"]['product_name'] ?? 'Unknown Product'); ?></div>
+                <div class="plan">$<?php echo number_format($data["product"]['price'] ?? 0, 2); ?></div>
+                <div class="brand text-muted"><?php echo htmlspecialchars($data["product"]['brand']); ?></div>
+               
                 <div class="size-title">Size</div>
-                <div class="size-detail">
-                    <div class="size-detail-item">S</div>
-                    <div class="size-detail-item">M</div>
-                    <div class="size-detail-item">L</div>
-                </div>
+                    <div class="size-detail">
+        
+                        <div class="size-detail-item">S</div>
+                        <div class="size-detail-item">M</div>
+                        <div class="size-detail-item">L</div>
+                    </div>
                 <div class="action">
                     <div class="quantity-controls">
                         <button id="decrease">-</button>
@@ -35,22 +40,25 @@
                     <button class="checkout">BUY IT NOW</button>
                 </div>
                 <div class="type-for-product">
-                    <div class="vendor">
+                <div class="vendor">
                         <div class="title">Vendor</div>
                         <div class="name">UrbanStep</div>
                     </div>
+
                     <div class="type">
                         <div class="title">Type:</div>
                         <div class="name">Sneakers</div>
                     </div>
+
                     <div class="sku">
                         <div class="title">Sku:</div>
-                        <div class="name">null</div>
+                        <div class="name">Unknown SKU</div>
                     </div>
                     <div class="available">
                         <div class="title">Available:</div>
                         <div class="name">Available</div>
                     </div>
+
                 </div>
                 <div class="shipping-infomation">
                     <div class="title">Shipping information</div>
@@ -60,7 +68,13 @@
                         <div>- Ships in our fully recyclable and biodegradable signature boxes.</div>
                     </div>
                 </div>
+    
             </div>
+        <?php else: ?>
+            <p>Product details not available.</p>
+        <?php endif; ?>
+    </div>
+</div>
         </div>
         <div class="description">
             <div class="info-des">

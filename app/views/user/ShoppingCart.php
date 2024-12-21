@@ -22,37 +22,37 @@
                     </tr>
                 </thead>
                 <tbody class="tbody">
-    <?php if (!empty($data['cartDetails'])): ?>
-        <?php foreach ($data['cartDetails'] as $item): ?>
-            <tr>
-                <td>
-                    <div class="infor-product-order">
-                        <img src="public/imgs/<?php echo htmlspecialchars($item['img_url']); ?>.webp" 
-                             alt="Hình sản phẩm" class="image-product">
-                        <div class="info-detail-order">
-                            <div class="name"><?php echo htmlspecialchars($item['product_name']); ?></div>
-                            <i class="fas fa-trash icon-delete" title="Xóa sản phẩm"></i>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                        <div class="quantity-controls">
-                            <button id="decrease">-</button>
-                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
-                            <button id="increase">+</button>
-                        </div>
-                </td>
-                <td>
-                    <div class="price">$<?php echo number_format($item['price'], 2); ?></div>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <tr>
-            <td colspan="3" style="text-align: center;">Giỏ hàng của bạn trống.</td>
-        </tr>
-    <?php endif; ?>
-</tbody>
+                    <?php if (!empty($data['cartDetails'])): ?>
+                        <?php foreach ($data['cartDetails'] as $item): ?>
+                            <tr>
+                                <td>
+                                    <div class="infor-product-order">
+                                        <img src="public/imgs/<?php echo htmlspecialchars($item['img_url']); ?>.webp" 
+                                            alt="Hình sản phẩm" class="image-product">
+                                        <div class="info-detail-order">
+                                            <div class="name"><?php echo htmlspecialchars($item['product_name']); ?></div>
+                                            <i class="fas fa-trash icon-delete" title="Xóa sản phẩm"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                        <div class="quantity-controls">
+                                            <button id="decrease">-</button>
+                                            <input type="number" id="quantity" class="quantity-display" value="1" readonly>
+                                            <button id="increase">+</button>
+                                        </div>
+                                </td>
+                                <td>
+                                    <div class="price">$<?php echo number_format($item['price'], 2); ?></div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3" style="text-align: center;">Giỏ hàng của bạn trống.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
                 
             </table>
             <div class="info-total-order">

@@ -30,11 +30,17 @@ class ShoppingCart extends Controller {
             $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
             $CartModel = $this->model('CartModel');
             $result = $CartModel->addProductToCart($productId, $quantity);
+            
             if ($result) {
-                echo "Sản phẩm đã được thêm vào giỏ hàng!";
+                // Lưu thông báo vào session
+                $_SESSION['message'] = "Sản phẩm đã được thêm vào giỏ hàng!";
             } else {
-                echo "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.";
+                $_SESSION['message'] = "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.";
             }
+    
+            // Chuyển hướng về trang sản phẩm
+            header("Location: /Warm-foots/Products"); // Đảm bảo đường dẫn đúng
+            exit();
         } else {
             echo "Yêu cầu không hợp lệ.";
         }
