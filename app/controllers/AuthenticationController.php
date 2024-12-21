@@ -1,6 +1,6 @@
 <?php
 require_once './app/models/UserModel.php';
-class Authentication extends Controller
+class AuthenticationController extends Controller
 {
 
     public function index()

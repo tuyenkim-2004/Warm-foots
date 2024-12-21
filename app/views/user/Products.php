@@ -109,7 +109,7 @@
                                 <span class="brand text-muted"><?php echo htmlspecialchars($product['brand']); ?></span>
                             </div>
                             <div class="submit">
-                                <form method="POST" action="./ShoppingCart/addToCart">
+                                <form method="POST" action="./ShoppingCartController/addToCart">
                                     <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
                                     <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">
                                     <input type="hidden" name="price" value="<?php echo $product['price']; ?>">

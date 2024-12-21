@@ -1,7 +1,7 @@
 
 <?php 
 require_once './app/models/ProductModel.php';
-class Products extends Controller {
+class ProductController extends Controller {
     function index(){
 
         $productlist = $this->model("ProductModel")->getProductList();

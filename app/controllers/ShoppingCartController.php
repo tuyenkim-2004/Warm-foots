@@ -1,7 +1,7 @@
 <?php
 require_once './app/models/CartModel.php';
 
-class ShoppingCart extends Controller {
+class ShoppingCartController extends Controller {
 
     public function index() {
         // Khởi tạo model
@@ -39,7 +39,7 @@ class ShoppingCart extends Controller {
             }
     
             // Chuyển hướng về trang sản phẩm
-            header("Location: /Warm-foots/Products"); // Đảm bảo đường dẫn đúng
+            header("Location: /Warm-foots/ProductController"); // Đảm bảo đường dẫn đúng
             exit();
         } else {
             echo "Yêu cầu không hợp lệ.";
