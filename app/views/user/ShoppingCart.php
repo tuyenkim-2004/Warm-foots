@@ -31,7 +31,7 @@
                                             alt="Hình sản phẩm" class="image-product">
                                         <div class="info-detail-order">
                                             <div class="name"><?php echo htmlspecialchars($item['product_name']); ?></div>
-                                            <i class="fas fa-trash icon-delete" title="Xóa sản phẩm"></i>
+                                            <i class="fas fa-trash icon-delete" title="Xóa sản phẩm" onclick="deleteFromCart(<?php echo htmlspecialchars($item['product_id']); ?>,<?php echo htmlspecialchars($item['cart_id']); ?>)"></i>
                                         </div>
                                     </div>
                                 </td>

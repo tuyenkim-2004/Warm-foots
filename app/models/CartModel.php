@@ -138,5 +138,15 @@ class CartModel extends Database {
         
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function removeDetails($productID,$carId) {
+        // Truy vấn SQL
+        $sql = "DELETE FROM cart_details WHERE cart_id = $carId AND product_id = $productID";
+        $stmt = $this->con->prepare($sql); 
+        if (!$stmt) {
+            die("Prepare failed: " . $this->con->error);
+        }
+        $result = $stmt->execute();
+        return $result;
+    }
 }
 ?>

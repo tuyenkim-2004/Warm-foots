@@ -13,6 +13,11 @@
 //             quantityInput.value = quantity;
 //         }
 //     });
+const deleteFromCart = (productid, cartid) => {
+    window.location.href = `/Warm-foots/ShoppingCartController/removeToCart?proId=${productid}&cartId=${cartid}`;
+};
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Lấy tất cả các nhóm quantity-controls
     const quantityControls = document.querySelectorAll('.quantity-controls');
@@ -47,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const row = this.closest('tr');
             if (row) {
                 row.remove();
+                
             }
         });
     });

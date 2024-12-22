@@ -10,6 +10,7 @@
         public function view($view, $data = [])
         {
             require_once './app/views/layouts/' . $view . '.php';
+            
         }
       
 

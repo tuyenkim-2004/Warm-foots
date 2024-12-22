@@ -45,5 +45,34 @@ class ShoppingCartController extends Controller {
             echo "Yêu cầu không hợp lệ.";
         }
     }
+    public function removeToCart() {
+        // Kiểm tra tham số đầu vào cos proId và cartId trong đường dẫn k (vd /shopingcartController/removetocart?proID=1&cartId=13) sau ? k ah tới đường link
+        if (!isset($_GET['proId']) || !isset($_GET['cartId'])) {
+            $_SESSION['message'] = "Thiếu tham số sản phẩm hoặc giỏ hàng.";
+            header("Location: /Warm-foots/ProductController");
+            exit();
+        }
+    
+        // Chuyển đổi tham số đầu vào thành số nguyên
+        $productId = intval($_GET['proId']);
+        $cartID = intval($_GET['cartId']);
+    
+        // Gọi model để xử lý logic xóa sản phẩm
+        $CartModel = $this->model('CartModel');
+        $result = $CartModel->removeDetails($productId, $cartID);
+    
+        // Kiểm tra kết quả trả về
+        if ($result) {
+            // Lưu thông báo vào session
+            $_SESSION['message'] = "Sản phẩm đã được xóa khỏi giỏ hàng.";
+        } else {
+            $_SESSION['message'] = "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng.";
+        }
+    
+        // Chuyển hướng về trang sản phẩm
+        header("Location: /Warm-foots/ShoppingCartController/index"); // Đảm bảo đường dẫn đúng
+        exit();
+    }
+    
 }
 ?>
