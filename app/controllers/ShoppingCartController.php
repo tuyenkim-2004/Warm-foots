@@ -46,32 +46,83 @@ class ShoppingCartController extends Controller {
         }
     }
     public function removeToCart() {
-        // Kiểm tra tham số đầu vào cos proId và cartId trong đường dẫn k (vd /shopingcartController/removetocart?proID=1&cartId=13) sau ? k ah tới đường link
+        header('Content-Type: application/json'); // Đảm bảo phản hồi là JSON
         if (!isset($_GET['proId']) || !isset($_GET['cartId'])) {
-            $_SESSION['message'] = "Thiếu tham số sản phẩm hoặc giỏ hàng.";
-            header("Location: /Warm-foots/ProductController");
-            exit();
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Thiếu tham số sản phẩm hoặc giỏ hàng.'
+            ]);
+            return;
         }
     
-        // Chuyển đổi tham số đầu vào thành số nguyên
         $productId = intval($_GET['proId']);
         $cartID = intval($_GET['cartId']);
-    
-        // Gọi model để xử lý logic xóa sản phẩm
         $CartModel = $this->model('CartModel');
         $result = $CartModel->removeDetails($productId, $cartID);
     
-        // Kiểm tra kết quả trả về
         if ($result) {
-            // Lưu thông báo vào session
-            $_SESSION['message'] = "Sản phẩm đã được xóa khỏi giỏ hàng.";
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Sản phẩm đã được xóa khỏi giỏ hàng.'
+            ]);
         } else {
-            $_SESSION['message'] = "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng.";
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Có lỗi xảy ra khi xóa sản phẩm.'
+            ]);
+        }
+    }
+
+    public function updateQuantity() {
+        header('Content-Type: application/json'); // Đảm bảo nội dung trả về là JSON
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $cartId = isset($_POST['cart_id']) ? intval($_POST['cart_id']) : 0;
+            $productId = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
+            $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+    
+            if ($cartId > 0 && $productId > 0 && $quantity > 0) {
+                $cartModel = $this->model('CartModel');
+                $newTotalPrice = $cartModel->updateQuantity($cartId, $productId, $quantity);
+    
+                if ($newTotalPrice) {
+                    echo json_encode([
+                        'status' => 'success',
+                        'message' => 'Cập nhật số lượng thành công.',
+                        'totalPrice' => $newTotalPrice // Trả về số float, không định dạng
+                    ]);
+                    return;
+                }
+            }
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Có lỗi xảy ra khi cập nhật số lượng.'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Yêu cầu không hợp lệ.'
+            ]);
+        }
+    }
+    public function getTotalPrice() {
+        // Khởi tạo model
+        $cartModel = $this->model('CartModel');
+    
+        // Lấy thông tin chi tiết giỏ hàng
+        $cartDetails = $cartModel->getCartDetails();
+    
+        // Tính tổng giá trị giỏ hàng
+        $totalPrice = 0;
+        foreach ($cartDetails as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
         }
     
-        // Chuyển hướng về trang sản phẩm
-        header("Location: /Warm-foots/ShoppingCartController/index"); // Đảm bảo đường dẫn đúng
-        exit();
+        // Trả về JSON cho client
+        echo json_encode([
+            'status' => 'success',
+            'totalPrice' => number_format($totalPrice, 2)
+        ]);
+        exit;
     }
     
 }

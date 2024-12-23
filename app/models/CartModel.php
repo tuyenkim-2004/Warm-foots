@@ -148,5 +148,34 @@ class CartModel extends Database {
         $result = $stmt->execute();
         return $result;
     }
+
+    public function updateQuantity($cartId, $productId, $quantity) {
+        // Cập nhật số lượng sản phẩm
+        $stmt = $this->prepare("UPDATE cart_details SET quantity = ? WHERE cart_id = ? AND product_id = ?");
+        if (!$stmt) {
+            echo "Lỗi chuẩn bị câu lệnh: " . $this->con->error;
+            return false;
+        }
+        $stmt->bind_param("iii", $quantity, $cartId, $productId);
+        $stmt->execute();
+
+        // Lấy tổng giá trị mới của giỏ hàng
+        $stmt = $this->prepare("
+            SELECT SUM(cd.quantity * p.price) AS total_price
+            FROM cart_details cd
+            JOIN products p ON cd.product_id = p.product_id
+            WHERE cd.cart_id = ?
+        ");
+        if (!$stmt) {
+            echo "Lỗi chuẩn bị câu lệnh: " . $this->con->error;
+            return false;
+        }
+        $stmt->bind_param("i", $cartId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        return $row['total_price'] ?? 0; 
+    }
 }
 ?>
