@@ -1,3 +1,18 @@
+
+<?php
+session_start();
+$quantity = isset($_SESSION['quantity']) ? $_SESSION['quantity'] : 1;
+
+if (isset($_POST['increase'])) {
+    $_SESSION['quantity']++;
+    $quantity = $_SESSION['quantity']; 
+} elseif (isset($_POST['decrease']) && $quantity > 1) {
+    $_SESSION['quantity']--;
+    $quantity = $_SESSION['quantity'];
+}
+$_SESSION['quantity'] = $quantity;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,12 +47,20 @@
                     </div>
                 <div class="action">
                     <div class="quantity-controls">
-                        <button id="decrease">-</button>
-                        <input type="number" id="quantity" class="quantity-display" value="1" readonly>
-                        <button id="increase">+</button>
+                        <button type="button" id="decrease" >-</button>
+                        <input type="number" name="quantity" class="quantity-display"  id="quantity-input"  value="<?php echo $quantity; ?>" readonly> 
+                        <button type="button" id="increase" >+</button>
                     </div>
-                    <button class="cart">ADD TO CART</button>
+                    <!-- <button class="cart" >ADD TO CART</button> -->
+                    <form method="POST" action="./ShoppingCartController/addToCart">
+                        <input type="hidden" name="product_id" value="<?php echo $data["product"]['product_id']; ?>">
+                        <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($data["product"]['product_name'] ?? 'Product Image'); ?>">
+                        <input type="hidden" name = "quantity" id = "quantityInCart">
+                        <input type="hidden" name="price"  id="hidden-quantity" value="<?php echo $quantity; ?>">
+                        <button type="submit" class="cart">ADD TO CART</button>
+                    </form>
                     <button class="checkout">BUY IT NOW</button>
+                    
                 </div>
                 <div class="type-for-product">
                 <div class="vendor">
@@ -84,7 +107,7 @@
             </div>
         </div>
    </div>
-    <script src="public/js/ProductDetail.js"></script>
+    <script src="public/js/ProductDetail.js?"></script>
 </body>
 
 </html>
