@@ -118,5 +118,8 @@ class ProductModel extends Database
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+   
+
 }
 ?>
