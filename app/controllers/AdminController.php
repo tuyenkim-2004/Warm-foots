@@ -4,7 +4,7 @@
         public function index()
         {
             $this->view('LayoutAdmin',[
-                "admin" =>"products/index"
+                "admin" =>"ManageProducts/index"
             ]);
         }
     }
