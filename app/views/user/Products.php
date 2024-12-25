@@ -95,7 +95,7 @@
                 <?php foreach ($data["productList"] as $product): ?>
                         <div class="product-card">
                             <div class="image">
-                            <a href="Products/Detail?id=<?php echo $product['product_id']; ?>">
+                            <a href="ProductController/detail?id=<?php echo $product['product_id']; ?>">
                                 <img src="public/imgs/<?php echo htmlspecialchars($product['img_url']); ?>.webp" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                             </a>
                             </div>
