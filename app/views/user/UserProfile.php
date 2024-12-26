@@ -10,7 +10,7 @@
         body {
             background-color: #f4f4f4;
             height: 100vh;
-            display: flex;
+            /* display: flex; */
             align-items: center;
             justify-content: center;
             margin: 0;
@@ -24,6 +24,8 @@
             width: 100%;
             max-width: 800px;
             min-height: 500px;
+            margin-bottom: 50px ;
+            
         }
 
         .avatar {
@@ -52,33 +54,42 @@
 
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 avatar">
-                <img id="avatarImage" src="https://via.placeholder.com/150" alt="Avatar">
-                <p>
-                    <input type="file" id="avatarInput" accept="image/*" style="display: none;" onchange="loadAvatar(event)">
-                    <button class="btn btn-primary mt-2" onclick="document.getElementById('avatarInput').click();">Upload New Avatar</button>
-                </p>
-            </div>
-            <div class="col-md-8">
-                <h2>Profile Settings</h2>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control short-input" placeholder="Your full name">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control short-input" placeholder="Your password">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control short-input" placeholder="Your email address">
-                    </div>
-                    <button type="submit" class="btn btn-success">Save Profile</button>
-                    <button type="button" class="btn btn-success ml-2">Edit</button>
-                </form>
-            </div>
+<?php
+    $user = $data["user_data"];
+    $fullName= $user["user_name"];
+    $email= $user["email"];
+    $password= $user["password"];
+
+?>
+
+<!-- HTML phần view -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 avatar">
+            <img id="avatarImage" src="<?php echo $avatar; ?>" alt="Avatar">
+            <p>
+                <button class="btn btn-primary mt-2" onclick="document.getElementById('avatarInput').click();">Upload New Avatar</button>
+            </p>
+        </div>
+        <div class="col-md-8">
+            <h2>Profile Settings</h2>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control short-input" value="<?php echo $fullName; ?>" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control short-input password"  value=  <?php echo $password; ?> placeholder="Your password">
+                    <input type="input" style = "display : none" class="form-control short-input password"  value=  <?php echo $password; ?> placeholder="Your password">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control short-input" value="<?php echo $email; ?>" placeholder="Your email address">
+                </div>
+                <button type="submit" class="btn btn-success">Save Profile</button>
+                <button type="button" class="btn btn-success ml-2">Edit</button>
+            </form>
         </div>
     </div>
+</div>
 
     <script>
         // Khi trang được tải, kiểm tra xem có avatar đã lưu trong localStorage không
@@ -103,6 +114,19 @@
                 reader.readAsDataURL(file);
             }
         }
+
+        const password = document.querySelectorAll(".password");
+
+            password[0].addEventListener("mouseout", () => {
+                password[0].style.display = "block";
+                password[1].style.display = "none";
+            })
+
+            password[0].addEventListener("mouseover", () => {
+                password[1].style.display = "block";
+                password[0].style.display = "none";
+            }
+        )
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

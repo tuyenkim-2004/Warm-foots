@@ -5,9 +5,13 @@ class App
     protected $controller = "HomeController";
     protected $action = "index"; 
     protected $params = [];
+    protected $dbConnection; // Thêm thuộc tính cho kết nối DB
+
 
     function __construct()
     {
+         // Khởi tạo kết nối cơ sở dữ liệu
+        //  $this->dbConnection = new PDO('mysql:host=localhost;dbname=your_database_name', 'username', 'password');
 
         $arr = $this->UrlProcess();
 
