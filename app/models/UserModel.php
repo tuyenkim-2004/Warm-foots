@@ -35,8 +35,6 @@
         if (!$results) {
             return [];
         }
-
-        // Lấy tất cả các hàng
         $userList = [];
         while ($row = $this->fetch($results)) {
             $userList[] = $row;
@@ -46,6 +44,42 @@
     }
 
 
-   
+    public function updateUser($id, $name, $password, $email)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $qr = "UPDATE users SET user_name = '$name', password = '$hashedPassword', email = '$email' WHERE user_id = '$id'";
 
+        if (mysqli_query($this->con, $qr)) {
+            return true; // Cập nhật thành công
+        } else {
+            // In ra lỗi nếu có
+            echo "Error updating record: " . mysqli_error($this->con);
+            return false; // Cập nhật thất bại
+        }
+    }
+
+
+    public function deleteUser($userId)
+    {
+        $deleteCartDetails = "DELETE cd FROM cart_details cd 
+                          JOIN carts c ON cd.cart_id = c.cart_id 
+                          WHERE c.user_id = $userId";
+        if (!mysqli_query($this->con, $deleteCartDetails)) {
+            echo "Lỗi khi xóa bản ghi trong bảng cart_details: " . mysqli_error($this->con);
+            return false;
+        }
+        $deleteCarts = "DELETE FROM carts WHERE user_id = $userId";
+        if (!mysqli_query($this->con, $deleteCarts)) {
+            echo "Lỗi khi xóa bản ghi trong bảng carts: " . mysqli_error($this->con);
+            return false;
+        }
+        $qr = "DELETE FROM users WHERE user_id = $userId";
+        if (mysqli_query($this->con, $qr)) {
+            return true; 
+        } else {
+            echo "Lỗi: " . mysqli_error($this->con);
+            return false; 
+        }
+    }
+    
 }

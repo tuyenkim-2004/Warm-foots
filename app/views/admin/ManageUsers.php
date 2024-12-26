@@ -28,17 +28,24 @@
                     <td><?php echo htmlspecialchars($user['password']); ?></td>
                     <td>
                         <div class="action">
-                            <a href="#"><img src="public/imgs/icon-delete.svg" alt="Icon delete" class="delete"></a>
-                            <button class="edit" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal"> <img src="public/imgs/icon-edit.svg" alt="Icon edit"></button>
+                            <a href="AdminController/deleteUser?id=<?php echo htmlspecialchars($user['user_id']); ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?');">
+                                <img src="public/imgs/icon-delete.svg" alt="Icon delete">
+                            </a>
+                            <button class="edit" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal"
+                                data-id="<?php echo htmlspecialchars($user['user_id']); ?>"
+                                data-username="<?php echo htmlspecialchars($user['user_name']); ?>"
+                                data-email="<?php echo htmlspecialchars($user['email']); ?>"
+                                data-password="<?php echo htmlspecialchars($user['password']); ?>">
+                                <img src="public/imgs/icon-edit.svg" alt="Icon edit">
+                            </button>
                         </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
-
     </table>
 </div>
-
+<script></script>
 <div class="modal" id="addUserModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -86,7 +93,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal" id="editUserModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -97,31 +103,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="info-detail">
-                    <label for="username">User Name:</label>
-                    <input type="text" name="username">
+            <form action="./AdminController/updateUser" method="POST" id="editUserForm">
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" id="user_id" value="">
+                    <div class="info-detail">
+                        <label for="username">User Name:</label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                    <div class="info-detail">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+
+                    <div class="info-detail">
+                        <label for="email">Email: </label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
                 </div>
-
-                <div class="info-detail">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password">
+                <div class="modal-footer">
+                    <button type="submit" class="create-user">Update User</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
-
-                <div class="info-detail">
-                    <label for="email">Email: </label>
-                    <input type="email" name="email">
-                </div>
-
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" data-bs-dismiss="modal" class="create-user"><a href="ProductController/ManageProduct">Edit User</a></button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
+            </form>
 
         </div>
     </div>
 </div>
+
+<script src="public/js/ManageUsers.js"></script>
