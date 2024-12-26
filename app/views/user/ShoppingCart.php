@@ -64,7 +64,7 @@
                 </div>
                 <div class="action">
                     <button class="back"><a href="#"><i class="fas fa-arrow-left"></i>   Continue Shopping</a></button>
-                    <button class="checkout"><a href="#">Checkout</a></button>
+                    <button class="checkout"><a href="./OrderController/Payment.php">Order</a></button>
                 </div>
             </div>
         </div>
