@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+}
+
+.left {
+    height: 100vh;
+    width: 21%;
+    background-color: white;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, .1);
+    transition: width 0.3s; 
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.left.shrink {
+    width: 60px; /* Chiều rộng thu nhỏ */
+}
+
+.title-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Căn giữa logo và biểu tượng menu */
+}
+
+.logo {
+    display: block; /* Hiển thị logo khi không thu nhỏ */
+}
+
+.icon-navbar {
+    cursor: pointer; /* Con trỏ thay đổi khi di chuột qua */
+}
+
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+}
+
+.menu-item {
+    width: 100%;
+    height: 65px;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.menu-item-detail {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.menu-item a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+.menu-item:hover {
+    background-color: #ae3f4f;
+}
+
+.menu-item:hover a {
+    color: white;
+}
+
+/* Ẩn nội dung bên trong khi thu nhỏ */
+.left.shrink .menu-item-detail div {
+    display: none; /* Ẩn tên khi thu nhỏ */
+}
+
+.left.shrink .logo {
+    display: none; /* Ẩn logo khi thu nhỏ */
+}
+
+

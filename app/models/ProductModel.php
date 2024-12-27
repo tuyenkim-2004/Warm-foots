@@ -44,40 +44,40 @@ class ProductModel extends Database
         return $result ? $result->fetch_assoc() : null;
     }
 
-    // Thêm sản phẩm mới
-    public function addProduct($name, $price, $quantity, $size, $brand, $img_url, $category_id)
+    public function addProduct($name, $price, $quantity, $brand)
     {
-        $stmt = $this->prepare("INSERT INTO products (product_name, price, quantity, size, brand, img_url, category_id) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sdissssi", $name, $price, $quantity, $size, $brand, $img_url, $category_id);
-        return $stmt->execute();
+        $qr = "INSERT INTO products (product_name, price, quantity, size, brand, img_url, category_id) VALUES ('$name', '$price', '$quantity', '[size]', '$brand', 'Sandals&Slides/MinimalistSandalswithAnkleStrap', 1)";
+        $result = false;
+        if (mysqli_query($this->con,
+            $qr
+        )) {
+            $result = true;
+        } else {
+            echo "Error: " . mysqli_error($this->con); 
+        }
+
+        return $result;
     }
 
-    // Cập nhật thông tin sản phẩm
-    public function updateProduct($id, $name, $price, $quantity, $size, $brand, $img_url, $category_id)
-    {
-        $stmt = $this->prepare("UPDATE products SET 
-                                    product_name = ?, 
-                                    price = ?, 
-                                    quantity = ?, 
-                                    size = ?, 
-                                    brand = ?, 
-                                    img_url = ?, 
-                                    category_id = ? 
-                                WHERE product_id = ?");
-        $stmt->bind_param("sdissssii", $name, $price, $quantity, $size, $brand, $img_url, $category_id, $id);
-        return $stmt->execute();
-    }
-
-    // Xóa sản phẩm
     public function deleteProduct($id)
     {
-        $stmt = $this->prepare("DELETE FROM products WHERE product_id = ?");
-        $stmt->bind_param("i", $id);
-        return $stmt->execute();
+        // Bước 1: Xóa các bản ghi trong cart_details
+        $deleteCartDetails = "DELETE FROM cart_details WHERE product_id = $id";
+        if (!mysqli_query($this->con, $deleteCartDetails)) {
+            echo "Lỗi khi xóa bản ghi trong bảng cart_details: " . mysqli_error($this->con);
+            return false;
+        }
+
+        // Bước 2: Xóa sản phẩm
+        $deleteProduct = "DELETE FROM products WHERE product_id = $id";
+        if (!mysqli_query($this->con, $deleteProduct)) {
+            echo "Lỗi khi xóa sản phẩm: " . mysqli_error($this->con);
+            return false;
+        }
+
+        return true; 
     }
 
-    // Đếm số lượng sản phẩm
     public function countProduct()
     {
         $result = $this->query("SELECT COUNT(*) as count FROM products");
@@ -119,7 +119,17 @@ class ProductModel extends Database
         return $result->fetch_assoc();
     }
 
-   
+    public function updateProduct($id, $name, $price, $quantity, $brand)
+    {
+        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = 'Sandals&Slides/MinimalistSandalswithAnkleStrap' WHERE product_id = '$id'";
+
+        $result = mysqli_query($this->con, $qr);
+        if (!$result) {
+            echo "Error updating product: " . mysqli_error($this->con);
+        }
+
+        return $result;
+    }
 
 }
 ?>

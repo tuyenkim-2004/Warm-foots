@@ -1,62 +1,89 @@
 <?php
 class OrderModel extends Database {
     
-    // Lấy thông tin sản phẩm trong giỏ hàng
+    // Lấy các sản phẩm trong giỏ hàng của người dùng
     public function getCartItems($userId) {
         $sql = "SELECT cd.product_id, p.product_name, p.img_url, cd.quantity, p.price
-        FROM cart_details cd
-        INNER JOIN products p ON cd.product_id = p.product_id
-        INNER JOIN carts c ON cd.cart_id = c.cart_id
-        WHERE c.user_id = ?";
+                FROM cart_details cd
+                INNER JOIN products p ON cd.product_id = p.product_id
+                INNER JOIN carts c ON cd.cart_id = c.cart_id
+                WHERE c.user_id = ?";
         $stmt = $this->con->prepare($sql);
+        if ($stmt === false) {
+            die('Error in prepare statement: ' . $this->con->error);
+        }
+
         $stmt->bind_param('i', $userId);
         $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result();
+        if ($result === false) {
+            die('Error in execute statement: ' . $stmt->error);
+        }
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
-
-    // Tạo đơn hàng mới
-    public function createOrder($userId, $orderDate, $address, $paymentMethod, $status, $cartItems) {
+    public function createOrder($userId, $orderDate, $address, $paymentMethod, $cartItems, $phone, $status = 'Processing') {
         try {
-            // Bắt đầu transaction
-            $this->con->begin_transaction();  // Dùng $this->con để kết nối
+            if (empty($cartItems)) {
+                throw new Exception("Cart is empty.");
+            }
+            $this->con->begin_transaction(); 
+            $totalAmount = 0;
+            foreach ($cartItems as $item) {
+                $totalAmount += $item['price'] * $item['quantity'];
+            }
 
-            // Thêm đơn hàng vào bảng `orders`
-            $sqlOrder = "INSERT INTO orders (user_id, order_date, shipping_address, payment_method, status) 
-                         VALUES (?, ?, ?, ?, ?)";
-            $stmtOrder = $this->con->prepare($sqlOrder);  // Dùng $this->con để kết nối
-            $stmtOrder->bind_param('issss', $userId, $orderDate, $address, $paymentMethod, $status);
+            $sqlOrder = "INSERT INTO orders (user_id, order_date, total_amount, shipping_address, payment_method, status, phone) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmtOrder = $this->con->prepare($sqlOrder);
+            if ($stmtOrder === false) {
+                throw new Exception('Error in prepare statement for order: ' . $this->con->error);
+            }
+
+            $stmtOrder->bind_param('isssssd', $userId, $orderDate, $totalAmount, $address, $paymentMethod, $status, $phone);
             $stmtOrder->execute();
+            if ($stmtOrder->error) {
+                throw new Exception('Error executing order statement: ' . $stmtOrder->error);
+            }
 
-            // Lấy ID của đơn hàng vừa tạo
-            $orderId = $this->con->insert_id;  // Dùng $this->con->insert_id để lấy ID của đơn hàng mới
-
-            // Thêm chi tiết đơn hàng vào bảng `order_details`
+            $orderId = $this->con->insert_id; 
             $sqlDetails = "INSERT INTO order_details (order_id, product_id, quantity, price) 
                            VALUES (?, ?, ?, ?)";
-            $stmtDetails = $this->con->prepare($sqlDetails);  // Dùng $this->con để kết nối
+            $stmtDetails = $this->con->prepare($sqlDetails);
+            if ($stmtDetails === false) {
+                throw new Exception('Error in prepare statement for order details: ' . $this->con->error);
+            }
 
             foreach ($cartItems as $item) {
                 $stmtDetails->bind_param('iiid', $orderId, $item['product_id'], $item['quantity'], $item['price']);
                 $stmtDetails->execute();
+                if ($stmtDetails->error) {
+                    throw new Exception('Error executing order details statement: ' . $stmtDetails->error);
+                }
             }
-
-            // Hoàn tất transaction
-            $this->con->commit();  // Dùng $this->con để kết nối
-
-            return $orderId;
+            
+            $this->con->commit(); 
+            return $orderId; 
         } catch (Exception $e) {
-            $this->con->rollback();  
-            throw $e; 
+            $this->con->rollback(); 
+            echo "Error: " . $e->getMessage(); 
+            return false;
         }
     }
-
-    // Xóa giỏ hàng sau khi thanh toán
     public function clearCart($userId) {
-        $sql = "DELETE FROM cart_details WHERE user_id = ?";  // Sử dụng tên bảng cart_details
-        $stmt = $this->con->prepare($sql);  // Dùng $this->con để kết nối
-        $stmt->bind_param('i', $userId);  // 'i' cho kiểu dữ liệu integer
+        $sql = "DELETE FROM cart_details WHERE cart_id IN (SELECT cart_id FROM carts WHERE user_id = ?)";
+        $stmt = $this->con->prepare($sql);
+        if ($stmt === false) {
+            die('Error in prepare statement for clear cart: ' . $this->con->error);
+        }
+
+        $stmt->bind_param('i', $userId);
         $stmt->execute();
+        if ($stmt->error) {
+            die('Error executing clear cart statement: ' . $stmt->error);
+        }
     }
+    
+   
 }
 
 ?>

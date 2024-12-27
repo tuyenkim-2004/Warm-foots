@@ -2,10 +2,10 @@
 
     class UserModel extends Database
     {
-        private $user;
     
     public function registerUser($name, $password, $email){
-            $qr = "INSERT INTO users(user_name, password, email, role_id) VALUES ('$name', '$password', '$email', 2)";
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $qr = "INSERT INTO users(user_name, password, email, role_id) VALUES ('$name', '$hashedPassword', '$email', 2)";
             $result = false;
             if (mysqli_query($this->con, $qr)) {
                 $result = true;
@@ -16,6 +16,70 @@
     public function loginUser($email){
         $sql = "SELECT * FROM users WHERE email = '$email'";
         return mysqli_query($this->con, $sql);
+    }
+
+    public function addUser($name, $pass, $email, $role)
+    {
+        $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+        $qr = "INSERT INTO users(user_name, password, email, role_id) VALUES ('$name', '$hashedPassword', '$email', $role)";
+
+        $result = false;
+        if (mysqli_query($this->con, $qr)) {
+            $result = true;
+        }
+        return $result;
+    }
+
+    public function getListUser(){
+        $results = $this->query("SELECT * FROM users");
+        if (!$results) {
+            return [];
+        }
+        $userList = [];
+        while ($row = $this->fetch($results)) {
+            $userList[] = $row;
+        }
+
+        return $userList;
+    }
+
+
+    public function updateUser($id, $name, $password, $email)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $qr = "UPDATE users SET user_name = '$name', password = '$hashedPassword', email = '$email' WHERE user_id = '$id'";
+
+        if (mysqli_query($this->con, $qr)) {
+            return true; // Cập nhật thành công
+        } else {
+            // In ra lỗi nếu có
+            echo "Error updating record: " . mysqli_error($this->con);
+            return false; // Cập nhật thất bại
+        }
+    }
+
+
+    public function deleteUser($userId)
+    {
+        $deleteCartDetails = "DELETE cd FROM cart_details cd 
+                          JOIN carts c ON cd.cart_id = c.cart_id 
+                          WHERE c.user_id = $userId";
+        if (!mysqli_query($this->con, $deleteCartDetails)) {
+            echo "Lỗi khi xóa bản ghi trong bảng cart_details: " . mysqli_error($this->con);
+            return false;
+        }
+        $deleteCarts = "DELETE FROM carts WHERE user_id = $userId";
+        if (!mysqli_query($this->con, $deleteCarts)) {
+            echo "Lỗi khi xóa bản ghi trong bảng carts: " . mysqli_error($this->con);
+            return false;
+        }
+        $qr = "DELETE FROM users WHERE user_id = $userId";
+        if (mysqli_query($this->con, $qr)) {
+            return true; 
+        } else {
+            echo "Lỗi: " . mysqli_error($this->con);
+            return false; 
+        }
     }
     
 }

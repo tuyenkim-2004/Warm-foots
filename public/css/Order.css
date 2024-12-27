@@ -13,7 +13,12 @@
     align-items: center;
     width: 100%;
 }
-
+.order_form{
+    display: flex;
+    flex-direction:row; /* Đặt các phần tử theo chiều dọc */
+    gap: 50px; 
+   
+}
 .form {
     display: flex;
     flex-direction: column;
@@ -26,19 +31,18 @@
 }
 
 
-.form input,
-.form textarea {
+.form input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
-/* Hiệu ứng focus cho các trường nhập */
-.form input:focus,
-.form textarea:focus {
+
+.form input:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
@@ -53,24 +57,21 @@
 }
 
 
-.form textarea {
-
-    min-height: 100px;
-}
-
 .frm-item {
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
     margin: 10px;
     display: flex;
     align-items: center;
-
+    position: relative; 
 }
 
 .img {
     flex: 1;
     max-width: 100px;
+    position: relative; 
 }
 
 .img img {
@@ -79,8 +80,17 @@
     border-radius: 4px;
 }
 
-.title {
+.quantity-overlay {
+    position: absolute;
+    background-color: rgba(18, 2, 2, 0.5); 
+    color: white;
+    padding: 5px;
+    border-radius: 60%;
+    font-size: 14px;
+    font-weight: bold;
+}
 
+.title {
     padding-left: 10px;
 }
 
@@ -124,6 +134,7 @@
 .button-container {
     text-align: center;
     margin-top: 20px;
+    width: 100%;
 }
 
 .submit-btn {
@@ -136,7 +147,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
-
+    width: 70%;
+    margin-bottom: 10px;
 
 }
 

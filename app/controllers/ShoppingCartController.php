@@ -7,20 +7,17 @@ class ShoppingCartController extends Controller {
         // Khởi tạo model
         $cartModel = $this->model('CartModel');
     
-        // Lấy thông tin chi tiết giỏ hàng
-        $cartDetails = $cartModel->getCartDetails();
     
-        // Tính tổng giá trị giỏ hàng
+        $cartDetails = $cartModel->getCartDetails();
         $totalPrice = 0;
         foreach ($cartDetails as $item) {
             $totalPrice += $item['price'] * $item['quantity'];
         }
 
-        // Render view với dữ liệu giỏ hàng và tổng giá trị
         $this->view('LayoutUser', [
             'user' => 'ShoppingCart',
-            'cartDetails' => $cartDetails, // Truyền dữ liệu giỏ hàng vào view
-            'totalPrice' => $totalPrice // Truyền tổng giá trị vào view
+            'cartDetails' => $cartDetails,
+            'totalPrice' => $totalPrice 
         ]);
 
     }
