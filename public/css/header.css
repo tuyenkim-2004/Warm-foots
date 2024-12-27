@@ -127,3 +127,12 @@ body {
 .dropdown-menu a:hover {
     background-color: #f0f0f0;
 }
+header a {
+  text-decoration: none; /* Xóa underline mặc định */
+  color: inherit; /* Giữ nguyên màu chữ theo nội dung */
+}
+
+header a:hover {
+  text-decoration: none; /* Không thêm underline khi hover */
+  color: blue; /* Tùy chỉnh màu chữ khi hover (nếu cần) */
+}
