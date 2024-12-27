@@ -9,7 +9,6 @@
         echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
         unset($_SESSION['error']);
     }
-    error_log("Dữ liệu đầu vào: Tên='$name', Email='$email', Vai trò='$role'");
     ?>
     <button class="add-user" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
     <table class="table table-striped w-100">

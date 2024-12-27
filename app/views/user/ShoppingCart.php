@@ -63,8 +63,8 @@
                     <div class="total">$<?php echo  number_format($data['totalPrice'], 2) ?></div>
                 </div>
                 <div class="action">
-                    <button class="back"><a href="#"><i class="fas fa-arrow-left"></i>   Continue Shopping</a></button>
-                    <button class="checkout"><a href="#">Checkout</a></button>
+                    <button class="back"><a href="./Products.php"><i class="fas fa-arrow-left"></i>   Continue Shopping</a></button>
+                    <button class="checkout"><a href="./OrderController/Order.php">Order</a></button>
                 </div>
             </div>
         </div>

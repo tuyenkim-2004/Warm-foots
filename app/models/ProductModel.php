@@ -44,22 +44,16 @@ class ProductModel extends Database
         return $result ? $result->fetch_assoc() : null;
     }
 
-    // Thêm sản phẩm mới
     public function addProduct($name, $price, $quantity, $brand)
     {
-        // Corrected SQL query
         $qr = "INSERT INTO products (product_name, price, quantity, size, brand, img_url, category_id) VALUES ('$name', '$price', '$quantity', '[size]', '$brand', 'Sandals&Slides/MinimalistSandalswithAnkleStrap', 1)";
-
         $result = false;
-
-        // Execute the query
         if (mysqli_query($this->con,
             $qr
         )) {
             $result = true;
         } else {
-            // Output the error if the query fails
-            echo "Error: " . mysqli_error($this->con); // This will show the MySQL error
+            echo "Error: " . mysqli_error($this->con); 
         }
 
         return $result;
@@ -81,7 +75,7 @@ class ProductModel extends Database
             return false;
         }
 
-        return true; // Trả về true nếu xóa thành công
+        return true; 
     }
 
     public function countProduct()

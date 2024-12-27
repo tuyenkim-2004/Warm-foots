@@ -29,9 +29,7 @@
                                 data-name="<?php echo htmlspecialchars($product['product_name']); ?>"
                                 data-price="<?php echo htmlspecialchars($product['price']); ?>"
                                 data-quantity="<?php echo htmlspecialchars($product['quantity']); ?>"
-                                data-brand="<?php echo htmlspecialchars($product['brand']); ?>"
-                                data-image="<?php echo htmlspecialchars($product['url_img']); ?>">
-
+                                data-brand="<?php echo htmlspecialchars($product['brand']); ?>">
                                 <img src="public/imgs/icon-edit.svg" alt="Icon edit">
                             </button>
                         </div>
@@ -108,7 +106,7 @@
                         <label for="quantity">Quantity: </label>
                         <input type="number" name="quantity" id="product_quantity">
                     </div>
-
+                    
                     <div class="info-detail">
                         <label for="brand">Brand: </label>
                         <input type="text" name="brand" id="product_brand">
