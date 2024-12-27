@@ -16,7 +16,6 @@ class ShoppingCartController extends Controller {
             $totalPrice += $item['price'] * $item['quantity'];
         }
 
-        // Render view với dữ liệu giỏ hàng và tổng giá trị
         $this->view('LayoutUser', [
             'user' => 'ShoppingCart',
             'cartDetails' => $cartDetails, // Truyền dữ liệu giỏ hàng vào view

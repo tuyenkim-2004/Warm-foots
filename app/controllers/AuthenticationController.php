@@ -65,10 +65,10 @@ class AuthenticationController extends Controller
                 $_SESSION['users'] = $user;
                 switch ($user['role_id']) {
                     case 2: 
-                        header('Location: /Warm-foots/Home/index');
+                        header('Location: /Warm-foots/HomeController/index');
                         exit(); // Dừng thực thi script
                     default: 
-                        header('Location: /Warm-foots/Admin/products/index'); // Điều chỉnh nếu cần
+                        header('Location: /Warm-foots/AdminController/manageProduct'); // Điều chỉnh nếu cần
                         exit();
                 }
             } else {
