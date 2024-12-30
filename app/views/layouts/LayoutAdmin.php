@@ -21,12 +21,6 @@
             </div>
             <div class="menu" id="menu">
                 <div class="menu-item">
-                    <a href="#" class="menu-item-detail">
-                        <img src="public/imgs/profile.svg" alt="Icon Profile">
-                        <div>Profile</div>
-                    </a>
-                </div>
-                <div class="menu-item">
                     <a href="AdminController/ManageUsers" class="menu-item-detail">
                         <img src="public/imgs/icon-user.svg" alt="Icon User">
                         <div>Manage User</div>
@@ -39,13 +33,13 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="#" class="menu-item-detail">
+                    <a href="AdminController/manageOrders" class="menu-item-detail">
                         <img src="public/imgs/icon-order.svg" alt="Icon Order">
                         <div>Manage Order</div>
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a href="#" class="menu-item-detail">
+                    <a href="AuthenticationController/logout" class="menu-item-detail">
                         <img src="public/imgs/icon-logout.svg" alt="Icon Logout">
                         <div>Logout</div>
                     </a>

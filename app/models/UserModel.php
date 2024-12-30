@@ -4,13 +4,23 @@
     {
     
     public function registerUser($name, $password, $email){
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $qr = "INSERT INTO users(user_name, password, email, role_id) VALUES ('$name', '$hashedPassword', '$email', 2)";
-            $result = false;
-            if (mysqli_query($this->con, $qr)) {
-                $result = true;
-            }
-            return $result;
+        $checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+        $stmt = $this->con->prepare($checkEmailQuery);
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return false; 
+        }
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $qr = "INSERT INTO users(user_name, password, email, role_id) VALUES (?, ?, ?, 2)";
+        $stmt = $this->con->prepare($qr);
+        $stmt->bind_param('sss', $name, $hashedPassword, $email);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false; 
     }
 
     public function loginUser($email){

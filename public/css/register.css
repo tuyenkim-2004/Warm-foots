@@ -131,3 +131,14 @@ margin-right: 10px;;
   display: flex;
   justify-content: space-evenly;
 }
+
+
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #f8d7da; /* Màu nền nhạt */
+    color: #721c24; /* Màu chữ */
+}

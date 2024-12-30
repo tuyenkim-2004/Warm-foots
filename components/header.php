@@ -38,10 +38,13 @@
             <i class="fa fa-user"></i>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="UserProfileController/displayUserProfile">Profile</a></li>
-            <li><a href="AuthenticationController/login">Log in</a></li>
-            <li><a href="#">Log out</a></li>
-             <li><a href="AuthenticationController/register">Register</a></li>
+              <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="UserProfileController/displayUserProfile">Profile</a></li>
+                <li><a href="AuthenticationController/logout">Log out</a></li>
+              <?php else: ?>
+                <li><a href="AuthenticationController/login">Log in</a></li>
+                <li><a href="AuthenticationController/register">Register</a></li>
+              <?php endif; ?>
           </ul>
         </div>
       </div>
