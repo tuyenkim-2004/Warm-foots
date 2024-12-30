@@ -82,8 +82,67 @@ class OrderModel extends Database {
             die('Error executing clear cart statement: ' . $stmt->error);
         }
     }
-    
-   
+
+
+    public function getOrders()
+    {
+        $sql = "
+            SELECT 
+            o.order_id,
+            u.user_name,
+            o.order_date,
+            p.img_url,
+            p.product_name,
+            od.quantity,
+            o.total_amount,
+            o.shipping_address,
+            o.status
+        FROM 
+            orders o
+        JOIN 
+            users u ON o.user_id = u.user_id
+        JOIN 
+            order_details od ON o.order_id = od.order_id
+        JOIN 
+            products p ON od.product_id = p.product_id
+        ORDER BY 
+            o.order_date DESC;
+        ";
+
+        $result = $this->con->query($sql);
+        $orders = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $orders[] = $row;
+            }
+            $result->free();
+        }
+        return $orders;
+    }
+
+    public function updateOrderStatus($order_id, $status)
+    {
+        $sql = "UPDATE orders SET status = ? WHERE order_id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param('si', $status, $order_id);
+        return $stmt->execute();
+    }
+
+    public function deleteOrder($order_id)
+    {
+        $sqlDetail = "DELETE FROM order_details WHERE order_id = ?";
+        $stmtDetail = $this->con->prepare($sqlDetail);
+        $stmtDetail->bind_param('i', $order_id);
+        $stmtDetail->execute();
+        $stmtDetail->close();
+
+        $sqlOrder = "DELETE FROM orders WHERE order_id = ?";
+        $stmtOrder = $this->con->prepare($sqlOrder);
+        $stmtOrder->bind_param('i', $order_id);
+        $result = $stmtOrder->execute();
+        $stmtOrder->close();
+        return $result;
+    }
 }
 
 ?>

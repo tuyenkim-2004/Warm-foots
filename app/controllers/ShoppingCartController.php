@@ -1,5 +1,4 @@
 <?php
-require_once './app/models/CartModel.php';
 
 class ShoppingCartController extends Controller {
 

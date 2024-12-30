@@ -9,22 +9,37 @@
                 <th>Quantity</th>
                 <th>Brand</th>
                 <th>Action</th>
+
             </tr>
         </thead>
         <tbody>
             <?php foreach ($data["productList"] as $product): ?>
                 <tr>
-                    <td> <img src="public/imgs/<?php echo htmlspecialchars($product['img_url']); ?>.webp" alt="Image Product" class="image"> </td>
+                    <td>
+                        <?php
+                        $imageName = trim(htmlspecialchars($product['img_url']));
+                        if (ctype_digit(substr($imageName, 0, 1))) {
+                            $imagePath = "public/imgs/$imageName";
+                        } else {
+                            $imagePath = "public/imgs/$imageName.webp";
+                        }
+                        if (file_exists($imagePath)) {
+                            echo '<img src="' . $imagePath . '" alt="Image Product" class="image">';
+                        } else {
+                            echo '<img src="public/imgs/default-image" alt="Default Image" class="image">';
+                        }
+                        ?>
+                    </td>
                     <td><?php echo htmlspecialchars($product['product_name']); ?></td>
-                    <td><?php echo $product['price']; ?> </td>
+                    <td><?php echo number_format($product['price'], 2); ?> </td>
                     <td><?php echo htmlspecialchars($product['quantity']); ?></td>
                     <td><?php echo htmlspecialchars($product['brand']); ?></td>
                     <td>
                         <div class="action">
-                            <a href="./AdminController/deleteProduct?id=<?php echo htmlspecialchars($product['product_id']); ?>" class="delete-product" onclick="return confirm('Bạn có chắc chắn muốn xóa san pham này?');">
+                            <a href="./AdminController/deleteProduct?id=<?php echo htmlspecialchars($product['product_id']); ?>" class="delete-product" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
                                 <img src="public/imgs/icon-delete.svg" alt="Icon delete" class="delete">
                             </a>
-                            <button class="edit" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal"
+                            <button class="edit" type="button" data-bs-toggle="modal" data-bs-target="#editProductModal"
                                 data-id="<?php echo htmlspecialchars($product['product_id']); ?>"
                                 data-name="<?php echo htmlspecialchars($product['product_name']); ?>"
                                 data-price="<?php echo htmlspecialchars($product['price']); ?>"
@@ -32,14 +47,16 @@
                                 data-brand="<?php echo htmlspecialchars($product['brand']); ?>">
                                 <img src="public/imgs/icon-edit.svg" alt="Icon edit">
                             </button>
+
                         </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
-
     </table>
 </div>
+
+
 <div class="modal" id="addProductModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -47,26 +64,31 @@
                 <h4 class="modal-title">Create Product</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="./AdminController/addProduct" method="POST">
+            <form action="./AdminController/addProduct" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="info-detail">
                         <label for="name">Product Name:</label>
-                        <input type="text" name="name">
+                        <input type="text" name="name" required>
+                    </div>
+
+                    <div class="info-detail">
+                        <label for="name">Product Image:</label>
+                        <input type="file" name="image" required>
                     </div>
 
                     <div class="info-detail">
                         <label for="price">Price:</label>
-                        <input type="number" name="price">
+                        <input type="number" name="price" required>
                     </div>
 
                     <div class="info-detail">
                         <label for="quantity">Quantity: </label>
-                        <input type="number" name="quantity">
+                        <input type="number" name="quantity" required>
                     </div>
 
                     <div class="info-detail">
                         <label for="brand">Brand: </label>
-                        <input type="text" name="brand">
+                        <input type="text" name="brand" required>
                     </div>
 
                 </div>
@@ -88,28 +110,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
-            <form action="./AdminController/updateProduct" method="POST">
+            <form action="./AdminController/updateProduct" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="product_id" id="product_id">
 
                     <div class="info-detail">
                         <label for="name">Product Name:</label>
-                        <input type="text" name="name" id="product_name">
+                        <input type="text" name="name" id="product_name" required>
+                    </div>
+
+                    <div class="info-detail">
+                        <label for="name">Product Image:</label>
+                        <input type="file" name="image" required>
                     </div>
 
                     <div class="info-detail">
                         <label for="price">Price:</label>
-                        <input type="number" name="price" id="product_price">
+                        <input type="number" name="price" id="product_price" required>
                     </div>
 
                     <div class="info-detail">
                         <label for="quantity">Quantity: </label>
-                        <input type="number" name="quantity" id="product_quantity">
+                        <input type="number" name="quantity" id="product_quantity" required>
                     </div>
-                    
+
                     <div class="info-detail">
                         <label for="brand">Brand: </label>
-                        <input type="text" name="brand" id="product_brand">
+                        <input type="text" name="brand" id="product_brand" required>
                     </div>
                 </div>
 

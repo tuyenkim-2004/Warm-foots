@@ -1,5 +1,4 @@
 <?php
-require_once './app/models/OrderModel.php';
 
 class OrderController extends Controller {
     
