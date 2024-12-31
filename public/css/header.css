@@ -128,11 +128,11 @@ body {
     background-color: #f0f0f0;
 }
 header a {
-  text-decoration: none; /* Xóa underline mặc định */
-  color: inherit; /* Giữ nguyên màu chữ theo nội dung */
+  text-decoration: none; 
+  color: inherit; 
 }
 
 header a:hover {
-  text-decoration: none; /* Không thêm underline khi hover */
-  color: blue; /* Tùy chỉnh màu chữ khi hover (nếu cần) */
+  text-decoration: none; 
+  color: blue; 
 }

@@ -15,7 +15,7 @@
 }
 .order_form{
     display: flex;
-    flex-direction:row; /* Đặt các phần tử theo chiều dọc */
+    flex-direction:row; 
     gap: 50px; 
    
 }
