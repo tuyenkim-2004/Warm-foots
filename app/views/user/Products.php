@@ -94,7 +94,10 @@
     </div>
 
     <div class="container">
-        <div class="product-list">
+    <div class="product-list">
+        <?php if (empty($data["productList"])): ?>
+            <p>No products found<?php echo isset($data["searchKeyword"]) ? ' for "' . htmlspecialchars($data["searchKeyword"]) . '"' : ''; ?>.</p>
+        <?php else: ?>
             <?php foreach ($data["productList"] as $product): ?>
                 <div class="product-card">
                     <div class="image">
@@ -135,8 +138,9 @@
                     </div>
                 </div>
             <?php endforeach; ?>
-        </div>
+        <?php endif; ?>
     </div>
+</div>
 </body>
 
 </html>

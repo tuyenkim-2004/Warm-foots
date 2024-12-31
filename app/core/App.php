@@ -14,11 +14,13 @@ class App
         //  $this->dbConnection = new PDO('mysql:host=localhost;dbname=your_database_name', 'username', 'password');
 
         $arr = $this->UrlProcess();
-
-        if (file_exists("./app/controllers/" . $arr[0] . ".php")) {
-            $this->controller = $arr[0];
-            unset($arr[0]);
+        if(isset($arr[0])) {
+            if (file_exists("./app/controllers/" . $arr[0] . ".php")) {
+                $this->controller = $arr[0];
+                unset($arr[0]);
+            }
         }
+
         require_once "./app/controllers/" . $this->controller . ".php";
         $this->controller = new $this->controller;
 

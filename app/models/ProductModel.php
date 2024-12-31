@@ -131,5 +131,14 @@ class ProductModel extends Database
         return $result;
     }
 
+    public function searchProducts($keyword) {
+        $data = [];
+        $sql = "SELECT * FROM products WHERE product_name LIKE '%$keyword%'";
+        $stmt = $this->query($sql);
+        while ($row = $this->fetch($stmt)){
+            $data[] = $row;
+        }
+        return $data; 
+    }
 }
 ?>

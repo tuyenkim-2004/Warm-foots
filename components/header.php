@@ -31,20 +31,25 @@
         </ul>
       </nav>
       <div class="icons">
-        <a href="#"><i class="fa fa-search"></i></a>
+      <form action="ProductController/search" method="post" class="search-form">
+          <input type="text" name="keyword" placeholder="Nhập tên sản phẩm..." style="padding: 5px;">
+          <button type="submit" style="background: none; border: none;">
+            <a href=""><i class="fa fa-search"></i></a>
+          </button>
+        </form>
         <a href="ShoppingCartController/index"><i class="fa fa-shopping-cart"></i></a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle userButton">
             <i class="fa fa-user"></i>
           </a>
           <ul class="dropdown-menu">
-              <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="UserProfileController/displayUserProfile">Profile</a></li>
-                <li><a href="AuthenticationController/logout">Log out</a></li>
-              <?php else: ?>
-                <li><a href="AuthenticationController/login">Log in</a></li>
-                <li><a href="AuthenticationController/register">Register</a></li>
-              <?php endif; ?>
+            <?php if (isset($_SESSION['user_id'])): ?>
+              <li><a href="UserProfileController/displayUserProfile">Profile</a></li>
+              <li><a href="AuthenticationController/logout">Log out</a></li>
+            <?php else: ?>
+              <li><a href="AuthenticationController/login">Log in</a></li>
+              <li><a href="AuthenticationController/register">Register</a></li>
+            <?php endif; ?>
           </ul>
         </div>
       </div>
