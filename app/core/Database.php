@@ -5,7 +5,7 @@
     public $con;
     protected $servername = "localhost";
     protected $username = "root";
-    protected $password = "1234";
+    protected $password = "";
     // protected $password = "";
     protected $dbname = "warm-foots";
 
