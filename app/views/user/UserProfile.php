@@ -118,7 +118,7 @@
                     </div>
                     <div class="form-group">
                     <input type="password" name="password" class="form-control short-input password" value="<?php echo htmlspecialchars($password); ?>" placeholder="Your password">                    </div>
-
+                
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success ml-2" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit</button>

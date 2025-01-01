@@ -11,6 +11,7 @@ class ProductController extends Controller {
             
         ]);
     }
+
     function detail() {
         $productID = $_GET['id'] ?? 0; 
         $product = $this->model("ProductModel")->getProductDetails($productID);
@@ -37,4 +38,26 @@ class ProductController extends Controller {
             echo json_encode([]); 
         }
     }
+
+    public function search()
+    {
+        if (isset($_POST['keyword'])) {
+
+            $keyword = trim($_POST['keyword']);
+
+            $productlist = $this->model("ProductModel")->searchProducts($keyword);
+
+            $this->view("LayoutUser", [
+                "user" => "Products",
+                "productList" => $productlist
+            ]);
+            
+        } else {
+            $this->view("LayoutUser", [
+                "user" => "Products",
+                "productList" => []
+            ]);
+        }
+    }
+
 }

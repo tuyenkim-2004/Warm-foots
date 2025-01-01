@@ -55,47 +55,34 @@
     </div>
 
     <div class="product-sells">
-        <div class="product-sell-item">
-            <div class="product-sell">
-                <img src="public/imgs/giay4.png" alt="">
-                <div class="info-product">
-                    <div class="price">$25.00</div>
-                    <div class="name">Classic White Tennis Sneakers</div>
-                    <div class="branch">Sportyfeet</div>
-                </div>
+    <?php foreach (array_slice($data["productList"], 1, 4) as $product): ?>
 
-            </div>
-        </div>
         <div class="product-sell-item">
             <div class="product-sell">
-                <img src="public/imgs/giay5.png" alt="">
+                <?php
+                    $imageName = trim(htmlspecialchars($product['img_url']));
+                    if (ctype_digit(substr($imageName, 0, 1))) {
+                        $imagePath = "public/imgs/$imageName";
+                    } else {
+                        $imagePath = "public/imgs/$imageName.webp";
+                    }
+                    if (file_exists($imagePath)) {
+                        echo '<img src="' . $imagePath . '" alt="Image Product" class="image">';
+                    } else {
+                        echo '<img src="public/imgs/default-image.webp" alt="Default Image" class="image">';
+                    }
+                ?>
                 <div class="info-product">
-                    <div class="price">$25.00</div>
-                    <div class="name">Classic Leather Sneakers</div>
-                    <div class="branch">UrbanStep</div>
+                    <div class="price">$<?php echo htmlspecialchars($product['price']); ?></div>
+                    <div class="name"><?php echo htmlspecialchars($product['product_name']); ?></div>
+                    <div class="branch"><?php echo htmlspecialchars($product['brand']); ?></div>
                 </div>
             </div>
         </div>
-        <div class="product-sell-item">
-            <div class="product-sell">
-                <img src="public/imgs/giay6.png" alt="">
-                <div class="info-product">
-                    <div class="price">$25.00</div>
-                    <div class="name">High-Top Canvas Sneakers</div>
-                    <div class="branch">TrendyFeet</div>
-                </div>
-            </div>
-        </div>
-        <div class="product-sell-item">
-            <div class="product-sell">
-                <img src="public/imgs/giay7.png" alt="">
-                <div class="info-product">
-                    <div class="price">$25.00</div>
-                    <div class="name">Breathable Mesh Slip-Ons</div>
-                    <div class="branch">AirWalk</div>
-                </div>
-            </div>
-        </div>
+
+    <?php endforeach; ?>
+
+       
     </div>
 
     <div class="banner-footer">

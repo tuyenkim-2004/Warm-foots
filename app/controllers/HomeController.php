@@ -3,11 +3,13 @@
     class HomeController extends Controller{
         public function index()
         {
-            $this->view('LayoutUser', [
-                "user" => "Home"
+            $productlist = $this->model("ProductModel")->getProductList();
+            $this->view("LayoutUser", [
+                "user" => "Home",
+                "productList" => $productlist
             ]);
             
         }
-        
+
     }
 ?>
