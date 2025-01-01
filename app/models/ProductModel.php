@@ -2,7 +2,6 @@
 
 class ProductModel extends Database
 {
-    // Lấy danh sách tất cả sản phẩm
     public function getProductList()
     {
         $results = $this->query("SELECT * FROM products");
@@ -90,16 +89,17 @@ class ProductModel extends Database
         $stmt->bind_param("s", $category_id);
         $stmt->execute();
         $result = $stmt->get_result();
-
-        // Lấy danh sách sản phẩm
         $products = [];
         while ($row = $result->fetch_assoc()) {
             $products[] = $row;
         }
-
         return $products;
     }
 
+    public function getAllProducts() {
+        $stmt = $this->con->query("SELECT * FROM products");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getProductDetails($productID) {
         // Truy vấn SQL
@@ -107,8 +107,6 @@ class ProductModel extends Database
                 FROM products p
                 JOIN categories c ON p.category_id = c.category_id
                 WHERE p.product_id = ?";
-
-    
         $stmt = $this->con->prepare($sql); 
         if (!$stmt) {
             die("Prepare failed: " . $this->con->error);
@@ -121,13 +119,12 @@ class ProductModel extends Database
 
     public function updateProduct($id, $name, $price, $quantity, $brand, $img_url)
     {
-        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = '$img_url' WHERE product_id = '$id'";
 
+        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = '$img_url' WHERE product_id = '$id'";
         $result = mysqli_query($this->con, $qr);
         if (!$result) {
             echo "Error updating product: " . mysqli_error($this->con);
         }
-
         return $result;
     }
 

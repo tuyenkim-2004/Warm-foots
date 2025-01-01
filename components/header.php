@@ -27,7 +27,7 @@
           <li><a href="#">SHOP</a></li>
           <li><a href="ProductController/index">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
-          <li><a href="#">ABOUT US</a></li>
+          <li><a href="AboutUsController/index">ABOUT US</a></li>
         </ul>
       </nav>
       <div class="icons">
