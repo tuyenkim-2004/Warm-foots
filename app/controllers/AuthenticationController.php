@@ -1,5 +1,4 @@
 <?php
-require_once './app/models/UserModel.php';
 class AuthenticationController extends Controller
 {
 
@@ -7,46 +6,43 @@ class AuthenticationController extends Controller
     {
         $this->register();
     }
-    
+
     public function register()
     {
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';
             $password = isset($_POST['password']) ? $_POST['password'] : '';
             $confirmPassword = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
-
             if (empty($name) || empty($password) || empty($confirmPassword) || empty($email)) {
                 $error = "Vui lòng điền đầy đủ thông tin.";
-                $this->view('user/Register', ['error' => $error]);
+                $this->view('LayoutUser', ['user' => 'Register', 'error' => $error]);
                 return;
             }
 
             if ($password !== $confirmPassword) {
                 $error = "Mật khẩu và xác nhận mật khẩu không khớp.";
-                $this->view('user/Register', ['error' => $error]);
+                $this->view('LayoutUser', ['user' => 'Register', 'error' => $error]);
                 return;
             }
+
             $userModel = $this->model('UserModel');
             $result = $userModel->registerUser($name, $password, $email);
 
-            if ($result) {
+            if ($result === true) {
                 header('Location: login');
                 exit;
+            } elseif ($result === false) {
+                $error = "Email đã tồn tại. Vui lòng sử dụng email khác.";
+                $this->view('LayoutUser', ['user' => 'Register', 'error' => $error]);
             } else {
                 $error = "Đăng ký thất bại. Vui lòng thử lại.";
-                $this->view('user/Register', ['error' => $error]);
+                $this->view('LayoutUser', ['user' => 'Register', 'error' => $error]);
             }
         } else {
-            $this->view('LayoutUser',[
-                "user" => 'Register'
-            ]);
+            $this->view('LayoutUser', ['user' => 'Register']);
         }
-
     }
-
-   
 
     public function login()
     {
@@ -66,7 +62,7 @@ class AuthenticationController extends Controller
                 switch ($user['role_id']) {
                     case 2: 
                         header('Location: /Warm-foots/HomeController/index');
-                        exit(); // Dừng thực thi script
+                        exit();
                     default: 
                         header('Location: /Warm-foots/AdminController/manageProduct'); // Điều chỉnh nếu cần
                         exit();
@@ -88,6 +84,14 @@ class AuthenticationController extends Controller
             'user' => 'Login'
         ]);
     }
+    }
+
+    public function logout()
+    {
+        session_unset(); 
+        session_destroy(); 
+        header('Location: /Warm-foots/HomeController/index'); 
+        exit();
     }
     
 }

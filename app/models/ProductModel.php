@@ -44,9 +44,9 @@ class ProductModel extends Database
         return $result ? $result->fetch_assoc() : null;
     }
 
-    public function addProduct($name, $price, $quantity, $brand)
+    public function addProduct($name, $price, $quantity, $brand, $img_url)
     {
-        $qr = "INSERT INTO products (product_name, price, quantity, size, brand, img_url, category_id) VALUES ('$name', '$price', '$quantity', '[size]', '$brand', 'Sandals&Slides/MinimalistSandalswithAnkleStrap', 1)";
+        $qr = "INSERT INTO products (product_name, price, quantity, size, brand, img_url, category_id) VALUES ('$name', '$price', '$quantity', '[size]', '$brand', '$img_url', 1)";
         $result = false;
         if (mysqli_query($this->con,
             $qr
@@ -118,9 +118,14 @@ class ProductModel extends Database
         return $result->fetch_assoc();
     }
 
-    public function updateProduct($id, $name, $price, $quantity, $brand)
+    public function updateProduct($id, $name, $price, $quantity, $brand, $img_url)
     {
+<<<<<<< HEAD
         $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = 'Sandals&Slides/MinimalistSandalswithAnkleStrap' WHERE product_id = '$id'";
+=======
+        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = '$img_url' WHERE product_id = '$id'";
+
+>>>>>>> 0733f0d27f94c665b7bc77d0002e29eb43dec9c4
         $result = mysqli_query($this->con, $qr);
         if (!$result) {
             echo "Error updating product: " . mysqli_error($this->con);

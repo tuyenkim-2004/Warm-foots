@@ -1,6 +1,5 @@
 <?php
-require_once './app/models/UserModel.php';
-require_once './app/models/ProductModel.php';
+
 
 class AdminController extends Controller
 {
@@ -59,9 +58,29 @@ class AdminController extends Controller
         $productPrice = floatval($_POST['price'] ?? 0.0);
         $productQuantity = intval($_POST['quantity'] ?? 0);
         $productBrand = $_POST['brand'] ?? '';
+        $img_url = '';
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+            $targetDir = 'public/imgs/';
+            $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+            $targetFile = $targetDir . $fileName;
 
+            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+            $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+            if (in_array($imageFileType, $allowedTypes)) {
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+                    $img_url = $fileName;
+                } else {
+                    echo "Có lỗi xảy ra khi tải ảnh.";
+                    return;
+                }
+            } else {
+                echo "Chỉ cho phép các định dạng jpg, jpeg, png, gif, webp.";
+                return;
+            }
+        }
         $productModel = $this->loadModel('ProductModel');
-        $result = $productModel->updateProduct($productId, $productName, $productPrice, $productQuantity, $productBrand);
+        $result = $productModel->updateProduct($productId, $productName, $productPrice, $productQuantity, $productBrand, $img_url);
 
         if ($result) {
             $this->manageProducts();
@@ -115,15 +134,39 @@ class AdminController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'] ?? '';
-            $price = intval($_POST['price'] ?? 0);
+            $price = floatval($_POST['price'] ?? 0); 
             $quantity = intval($_POST['quantity'] ?? 0);
             $brand = $_POST['brand'] ?? '';
 
-            $productModel = $this->loadModel('ProductModel');
-            $result = $productModel->addProduct($name, $price, $quantity, $brand);
-            if($result)
-            {
+            $img_url = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $targetDir = 'public/imgs/';
+                $fileName = uniqid() . '_' . basename($_FILES['image']['name']); // Tạo tên file duy nhất
+                $targetFile = $targetDir . $fileName;
+
+                $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+                $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+                if (in_array($imageFileType, $allowedTypes)) {
+                    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+                        $img_url = $fileName; 
+                    } else {
+                        echo "Có lỗi xảy ra khi tải ảnh.";
+                        return; 
+                    }
+                } else {
+                    echo "Chỉ cho phép các định dạng jpg, jpeg, png, gif, webp.";
+                    return; 
+                }
+            }
+
+            $productModel = $this->model('ProductModel');
+            $result = $productModel->addProduct($name, $price, $quantity, $brand, $img_url);
+
+            if ($result) {
                 $this->manageProducts();
+            } else {
+                echo "Có lỗi xảy ra khi thêm sản phẩm.";
             }
         }
     }
@@ -139,4 +182,37 @@ class AdminController extends Controller
         }
         exit();
     }
+
+    public function manageOrders()
+    {
+        $orderList = $this->model("OrderModel")->getOrders();
+        $this->view('LayoutAdmin', [
+            'admin' => 'ManageOrders',
+            'orders' => $orderList
+        ]);
+    }
+
+    public function updateOrder()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $order_id = $_POST['order_id'] ?? null;
+            $status = $_POST['status'] ?? null;
+            if ($order_id && $status) {
+                $this->model("OrderModel")->updateOrderStatus($order_id, $status);
+            }
+           $this->manageOrders();
+        }
+    }
+
+    public function deleteOrder()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $order_id = $_POST['order_id'] ?? null;
+            if ($order_id) {
+                $this->model("OrderModel")->deleteOrder($order_id);
+            }
+            $this->manageOrders();
+        }
+    }
+   
 }
