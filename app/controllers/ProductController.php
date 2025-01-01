@@ -8,13 +8,13 @@ class ProductController extends Controller {
         $this->view("LayoutUser", [
             "user" => "Products",
             "productList" => $productlist
+            
         ]);
     }
 
     function detail() {
         $productID = $_GET['id'] ?? 0; 
         $product = $this->model("ProductModel")->getProductDetails($productID);
-        
         if (!$product) {
             die("Product not found");
         }
@@ -24,21 +24,19 @@ class ProductController extends Controller {
         ]);
     }
 
-    public function FilterByCategory() {
+    public function filterByCategory() {
         $category = $_GET['category_id'] ?? '';
+        if (empty($category)) {
+            echo json_encode(['error' => 'Missing category_id']); 
+            return;
+        }
         $productModel = $this->model("ProductModel");
         $products = $productModel->filterByCategory($category);
-        
-        $this->view("LayoutUser", [
-            "user" => "FilterProducts",
-            "products" => $products,
-            "category_id" => $category
-        ]);
-    }
-
-    public function updateProduct()
-    {
-        
+        if ($products) {
+            echo json_encode($products);
+        } else {
+            echo json_encode([]); 
+        }
     }
 
     public function search()

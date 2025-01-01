@@ -127,6 +127,7 @@ body {
 .dropdown-menu a:hover {
     background-color: #f0f0f0;
 }
+<<<<<<< HEAD
 .search-form {
   display: flex;
   align-items: center;
@@ -142,3 +143,14 @@ body {
   transition: box-shadow 0.3s, background-color 0.3s;
   width: 200px;
 }
+=======
+header a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+header a:hover {
+  text-decoration: none; 
+  color: blue; 
+}
+>>>>>>> 2253ec191a78fb29c6d426e0f124ed6624814169

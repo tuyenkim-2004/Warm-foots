@@ -12,7 +12,6 @@ class OrderModel extends Database {
         if ($stmt === false) {
             die('Error in prepare statement: ' . $this->con->error);
         }
-
         $stmt->bind_param('i', $userId);
         $stmt->execute();
         $result = $stmt->get_result();
