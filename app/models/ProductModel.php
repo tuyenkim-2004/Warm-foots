@@ -2,7 +2,6 @@
 
 class ProductModel extends Database
 {
-    // Lấy danh sách tất cả sản phẩm
     public function getProductList()
     {
         $results = $this->query("SELECT * FROM products");
@@ -120,12 +119,8 @@ class ProductModel extends Database
 
     public function updateProduct($id, $name, $price, $quantity, $brand, $img_url)
     {
-<<<<<<< HEAD
-        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = 'Sandals&Slides/MinimalistSandalswithAnkleStrap' WHERE product_id = '$id'";
-=======
-        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = '$img_url' WHERE product_id = '$id'";
 
->>>>>>> 0733f0d27f94c665b7bc77d0002e29eb43dec9c4
+        $qr = "UPDATE products SET product_name = '$name', price = '$price', quantity = '$quantity', brand = '$brand', img_url = '$img_url' WHERE product_id = '$id'";
         $result = mysqli_query($this->con, $qr);
         if (!$result) {
             echo "Error updating product: " . mysqli_error($this->con);

@@ -61,7 +61,6 @@
             </div>
         </div>
 
-<<<<<<< HEAD
         <div class="categories">
             <ul id="category-list">
                 <li><a href="#" class="category-link" data-category-id="1">Athletic Footwear</a></li>
@@ -153,23 +152,7 @@
                             </div>  
                         </div>
                 <?php endforeach; ?>
-=======
-        <div class="from_group">
-            <div class="img">
-                <img src="public/imgs/LuxuryLeatherShoes/slider.webp" alt="">
-            </div>
-            <div class="title">
-                <a href="Products/FilterByCategory?category_id=3"><span>Luxury Leather Shoes</span></a>
-            </div>
-        </div>
 
-        <div class="from_group">
-            <div class="img">
-                <img src="public/imgs/Sandals&Slides/slider.webp" alt="">
-            </div>
-            <div class="title">
-                <a href="Products/FilterByCategory?category_id=4"><span> Sandals & Slides</span></a>
->>>>>>> 0733f0d27f94c665b7bc77d0002e29eb43dec9c4
             </div>
         </div>
 
