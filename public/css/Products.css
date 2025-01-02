@@ -173,7 +173,7 @@ body {
     color: #333; 
 }
 
-.product-card .add-to-cart, .buy-now a {
+.product-card .add-to-cart, .buy-now {
     background-color: black; 
     color: white; 
     border: none;
@@ -194,7 +194,7 @@ button{
     transition: width .5s ease-out;
     color: black; 
 }
-.product-card .buy-now:hover a{
+.product-card .buy-now:hover{
     background-color: white; 
     transition: width .5s ease-out;
     color: black; 

@@ -62,7 +62,7 @@
 
         <div class="from_group">
             <div class="img">
-                <img src="public/imgs/Sandals&Slides/slider.webp" alt="">
+                <img src="public/imgs/SandalsSlides/slider.webp" alt="">
             </div>
             <div class="title">
                 <a href="#" class="category-link" data-category-id="4">Sandals & Slides</a>
@@ -92,48 +92,58 @@
             <li><a href="#" class="category-link" data-category-id="5">Sneakers Haven</a></li>
         </ul>
     </div>
-   
 
     <div class="container">
-<<<<<<< HEAD
-    <div class="product-list">
-        <?php if (empty($data["productList"])): ?>
-            <p>No products found<?php echo isset($data["searchKeyword"]) ? ' for "' . htmlspecialchars($data["searchKeyword"]) . '"' : ''; ?>.</p>
-        <?php else: ?>
-=======
-        <div id="product-list">
->>>>>>> 2253ec191a78fb29c6d426e0f124ed6624814169
-            <?php foreach ($data["productList"] as $product): ?>
-                <div class="product-card">
-                    <div class="image">
-                        <a href="ProductController/detail?id=<?php echo $product['product_id']; ?>">
-                            <img src="public/imgs/<?php echo htmlspecialchars($product['img_url']); ?>.webp" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                        </a>
-                    </div>
-                    <div class="item_list">
-                        <span class="price text-success"><?php echo $product['price']; ?> USD</span>
-                    </div>
-                    <div class="item_list">
-                        <h4 class="title-cart"><?php echo htmlspecialchars($product['product_name']); ?></h4>
-                    </div>
-                    <div class="item_list">
-                        <span class="brand text-muted"><?php echo htmlspecialchars($product['brand']); ?></span>
-                    </div>
-                    <div class="submit">
-                        <form method="POST" action="./ShoppingCartController/addToCart">
-                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
-                            <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">
-                            <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
-                            <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="add-to-cart">Add to Cart</button>
-                        </form>
-                        <button class="buy-now"> <a href="">Buy Now</a></button>
-                    </div>
+        <div class="product-list">
+            <?php if (empty($data["productList"])): ?>
+                <p>No products found<?php echo isset($data["searchKeyword"]) ? ' for "' . htmlspecialchars($data["searchKeyword"]) . '"' : ''; ?>.</p>
+            <?php else: ?>
+                <div id="product-list">
+                    <?php foreach ($data["productList"] as $product): ?>
+                        <div class="product-card">
+                            <div class="image">
+                                <a href="ProductController/detail?id=<?php echo $product['product_id']; ?>">
+                                    <?php
+                                        $imageName = trim(htmlspecialchars($product['img_url']));
+                                        if (ctype_digit(substr($imageName, 0, 1))) {
+                                            $imagePath = "public/imgs/$imageName";
+                                        } else {
+                                            $imagePath = "public/imgs/$imageName.webp";
+                                        }
+                                        if (file_exists($imagePath)) {
+                                            echo '<img src="' . $imagePath . '" alt="Image Product" class="image">';
+                                        } else {
+                                            echo '<img src="public/imgs/default-image" alt="Default Image" class="image">';
+                                        }
+                                    ?>           
+                                </a>
+                            </div>
+                            <div class="item_list">
+                                <span class="price text-success"><?php echo $product['price']; ?> USD</span>
+                            </div>
+                            <div class="item_list">
+                                <h4 class="title-cart"><?php echo htmlspecialchars($product['product_name']); ?></h4>
+                            </div>
+                            <div class="item_list">
+                                <span class="brand text-muted"><?php echo htmlspecialchars($product['brand']); ?></span>
+                            </div>
+                            <div class="submit">
+                                <form method="POST" action="./ShoppingCartController/addToCart">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                    <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                    <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                                </form>
+                                <button class="buy-now"> Buy Now</button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
+
 </body>
 
 </html>
