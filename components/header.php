@@ -17,7 +17,7 @@
 
 <body>
   <header class="header">
-    <div class="navbar">
+    <div class="navbars">
       <div class="logo">
         <img src="./public/imgs/logo.png" alt="shoe" class="logo-icon">
       </div>

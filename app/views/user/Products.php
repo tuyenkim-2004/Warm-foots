@@ -19,11 +19,11 @@
         <?php unset($_SESSION['message']); ?>
     <?php endif; ?>
 
-    <div class="container">
+    <!-- <div class="container">
         <a href="" title="home">Home</a>
         <span aria-hidden="true">/</span>
         <span>Products</span>
-    </div>
+    </div> -->
 
     <div class="banner">
         <img src="public/imgs/slider4.webp" alt="Shoe" class="banner-image">

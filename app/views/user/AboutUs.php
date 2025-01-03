@@ -8,11 +8,11 @@
 </head>
 <body>
   
-    <div class="aboutus_container">
+    <!-- <div class="aboutus_container">
             <a href ="" title ="home">Home</a>
             <span aria-hidden="true">/</span>
             <span>About Us</span>
-    </div>
+    </div> -->
 
     <div class="banner">
         <img src="https://www.skechersvn.vn/cdn/shop/files/KV_Tres_Air_UNO_1920x840_0de3da29-2b9e-405a-a05a-5224525d3b93_1600x.jpg?v=1726513570" alt="Shoe" class="banner-image">
