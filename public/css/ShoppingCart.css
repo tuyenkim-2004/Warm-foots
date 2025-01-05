@@ -22,27 +22,27 @@ table{
 }
 
 table {
-    width: 100%; /* Đảm bảo bảng có chiều rộng 100% */
-    border-collapse: collapse; /* Để loại bỏ khoảng cách giữa các ô */
+    width: 100%; 
+    border-collapse: collapse; 
 }
 
 thead {
-    display: table; /* Đảm bảo thead giữ định dạng bảng */
-    width: 100%; /* Đảm bảo thead có chiều rộng 100% */
-    table-layout: fixed; /* Cố định chiều rộng cột */
+    display: table; 
+    width: 100%; 
+    table-layout: fixed; 
 }
 
 tbody {
-    display: block; /* Để có thể sử dụng overflow */
-    max-height: 400px; /* Chiều cao tối đa cho tbody */
-    overflow-y: auto; /* Bật thanh cuộn dọc */
-    width: 100%; /* Đảm bảo tbody có chiều rộng 100% */
+    display: block; 
+    max-height: 400px; 
+    overflow-y: auto; 
+    width: 100%; 
 }
 
 tbody tr {
-    display: table; /* Đảm bảo các hàng vẫn giữ dạng bảng */
-    width: 100%; /* Đảm bảo độ rộng là 100% */
-    table-layout: fixed; /* Cố định chiều rộng cột */
+    display: table; 
+    width: 100%; 
+    table-layout: fixed; 
 }
 
 thead>tr>th{

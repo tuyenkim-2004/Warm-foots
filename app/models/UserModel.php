@@ -60,11 +60,10 @@
         $qr = "UPDATE users SET user_name = '$name', password = '$hashedPassword', email = '$email' WHERE user_id = '$id'";
 
         if (mysqli_query($this->con, $qr)) {
-            return true; // Cập nhật thành công
+            return true; 
         } else {
-            // In ra lỗi nếu có
             echo "Error updating record: " . mysqli_error($this->con);
-            return false; // Cập nhật thất bại
+            return false; 
         }
     }
 

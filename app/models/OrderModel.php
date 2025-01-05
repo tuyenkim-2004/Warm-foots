@@ -142,6 +142,47 @@ class OrderModel extends Database {
         $stmtOrder->close();
         return $result;
     }
+
+    public function getOrderById($orderId) {
+        $sql = "
+            SELECT 
+                o.order_id,
+                u.user_name,
+                o.order_date,
+                o.total_amount,
+                o.shipping_address,
+                o.status,
+                p.product_name,
+                p.img_url,
+                od.quantity,
+                od.price
+            FROM 
+                orders o
+            JOIN 
+                users u ON o.user_id = u.user_id
+            JOIN 
+                order_details od ON o.order_id = od.order_id
+            JOIN 
+                products p ON od.product_id = p.product_id
+            WHERE 
+                o.order_id = ?
+        ";
+    
+        $stmt = $this->con->prepare($sql);
+        if ($stmt === false) {
+            die('Error in prepare statement: ' . $this->con->error);
+        }
+        
+        $stmt->bind_param('i', $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result === false) {
+            die('Error in execute statement: ' . $stmt->error);
+        }
+    
+        return $result->fetch_all(MYSQLI_ASSOC); 
+    }
 }
 
 ?>

@@ -49,24 +49,32 @@ class OrderController extends Controller {
             exit();
         }
     }
-    
     public function placeOrder() {
-
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userId = $_SESSION['user_id']; 
-            date_default_timezone_set('Asia/Ho_Chi_Minh'); 
-            $orderDate = date('Y-m-d H:i:s');  
-            $address = $_POST['shipping_address'];  
-            $paymentMethod = $_POST['payment_method'] ?? 'cash on delivery';  
-            $status = 'Processing';  
-            $phone = $_POST['phone']; 
-           
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_SESSION['user_id'] ?? null;
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $orderDate = date('Y-m-d H:i:s');
+            $address = $_POST['shipping_address'];
+            $paymentMethod = $_POST['payment_method'] ?? 'cash on delivery';
+            $phone = $_POST['phone'];
+            $status = 'Processing';
+    
             if (empty($address) || empty($phone)) {
                 echo 'Address or phone is empty.';
                 return;
             }
     
-            $cartItems = $this->model("OrderModel")->getCartItems($userId);
+            $cartItems = [];
+            if (!empty($_SESSION['buy_now'])) {
+                $buyNowData = $_SESSION['buy_now'];
+                $cartItems = [[
+                    'product_id' => $buyNowData['product_id'],
+                    'quantity' => $buyNowData['quantity'],
+                    'price' => $buyNowData['price']
+                ]];
+            } else {
+                $cartItems = $this->model("OrderModel")->getCartItems($userId);
+            }
     
             if (!empty($cartItems)) {
                 try {
@@ -78,6 +86,12 @@ class OrderController extends Controller {
                         $cartItems,
                         $phone
                     );
+    
+                    unset($_SESSION['buy_now']);
+                    if (empty($_SESSION['buy_now'])) {
+                        $this->model("OrderModel")->clearCart($userId);
+                    }
+
                     $this->model("OrderModel")->clearCart($userId);
                     echo "<script>
                         alert('Order placed successfully!');
@@ -90,7 +104,6 @@ class OrderController extends Controller {
                     ]);  
                                   
                      exit();
-                    
                 } catch (Exception $e) {
                     echo "Error: " . $e->getMessage();
                 }
@@ -99,7 +112,63 @@ class OrderController extends Controller {
             }
         }
     }
+    
+    public function buyNow() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $productId = $_POST['product_id'] ?? 0; 
+            $quantity = $_POST['quantity'] ?? 1;  
+            $price = $_POST['price'] ?? 0;        
+            $imageName = $_POST['img_url'] ?? 'public/imgs/default-image.webp';
+            $productName = $_POST['product_name'] ?? 'Unnamed Product'; 
+            if (empty($productId) || empty($price)) {
+                echo "Invalid product data.";
+                return;
+            }
+    
+            $_SESSION['buy_now'] = [
+                'product_id' => $productId,
+                'quantity' => $quantity,
+                'price' => $price,
+                'img_url' =>   $imageName,
+                'product_name' => $productName
+            ];
+    
+            // Tính toán tổng tiền
+            $totalAmount = $price * $quantity;
+            $this->view("LayoutUser", [
+                "user" => "Order",
+                "orderDetails" => [[
+                    'product_id' => $productId,
+                    'quantity' => $quantity,
+                    'price' => $price,
+                    'img_url' =>    $imageName,
+                    'product_name' => $productName
+                ]],
+                "totalAmount" => $totalAmount
+            ]);
+        } else {
+            echo "Invalid request method.";
+        }
+    }
 
+    public function checkoutView() {
+        $buyNowData = $_SESSION['buy_now'] ?? null;
+    
+        if ($buyNowData) {
+            $productId = $buyNowData['product_id'];
+            $quantity = $buyNowData['quantity'];
+            $price = $buyNowData['price'];
+            $imageName = $buyNowData['img_url'];
+            
+            $this->view("checkoutView", [
+                'product_id' => $productId,
+                'quantity' => $quantity,
+                'price' => $price
+            ]);
+        } else {
+            echo "No product selected.";
+        }
+    }
 
 }
 ?>

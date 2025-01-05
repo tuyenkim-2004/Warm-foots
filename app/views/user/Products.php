@@ -135,7 +135,15 @@
                                     <input type="hidden" name="quantity" value="1">
                                     <button type="submit" class="add-to-cart">Add to Cart</button>
                                 </form>
-                                <button class="buy-now"> Buy Now</button>
+                                <!-- <button class="buy-now"> Buy Now</button> -->
+                                <form method="POST" action="./OrderController/buyNow">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                    <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                    <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="img_url" value="<?php echo htmlspecialchars($product['img_url']); ?>">
+                                    <button type="submit" class="buy-now">Buy Now</button>
+                                </form>
                             </div>
                         </div>
                     <?php endforeach; ?>
