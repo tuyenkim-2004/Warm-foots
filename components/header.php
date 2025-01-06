@@ -17,21 +17,20 @@
 
 <body>
   <header class="header">
-    <div class="navbar">
+    <div class="navbars">
       <div class="logo">
         <img src="./public/imgs/logo.png" alt="shoe" class="logo-icon">
       </div>
       <nav>
         <ul class="nav-menu">
           <li><a href="HomeController/index">HOME</a></li>
-          <!-- <li><a href="#">SHOP</a></li> -->
           <li><a href="ProductController/index">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
           <li><a href="AboutUsController/index">ABOUT US</a></li>
         </ul>
       </nav>
       <div class="icons">
-      <form action="ProductController/search" method="post" class="search-form">
+        <form action="ProductController/search" method="post" class="search-form">
           <input type="text" name="keyword" placeholder="Nhập tên sản phẩm..." style="padding: 5px;">
           <button type="submit" style="background: none; border: none;">
             <a href=""><i class="fa fa-search"></i></a>
