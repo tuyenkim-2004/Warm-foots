@@ -1,22 +1,3 @@
-//  const quantityInput = document.getElementById('quantity');
-//     let quantity = 1;
-
-//     document.getElementById('increase').addEventListener('click', () => {
-//         quantity++;
-//         quantityInput.value = quantity;
-//     });
-
-//     document.getElementById('decrease').addEventListener('click', () => {
-//         console.log("njvgg")
-//         if (quantity > 1) {
-//             quantity--;
-//             quantityInput.value = quantity;
-//         }
-//     });
-// const deleteFromCart = (productid, cartid) => {
-//     window.location.href = `/Warm-foots/ShoppingCartController/removeToCart?proId=${productid}&cartId=${cartid}`;
-// };
-
 
 document.addEventListener('DOMContentLoaded', function () {
     // Tăng/giảm số lượng sản phẩm

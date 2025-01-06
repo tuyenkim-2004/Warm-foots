@@ -24,7 +24,7 @@
       <nav>
         <ul class="nav-menu">
           <li><a href="HomeController/index">HOME</a></li>
-          <li><a href="#">SHOP</a></li>
+          <!-- <li><a href="#">SHOP</a></li> -->
           <li><a href="ProductController/index">PRODUCTS</a></li>
           <li><a href="#">BLOG</a></li>
           <li><a href="AboutUsController/index">ABOUT US</a></li>

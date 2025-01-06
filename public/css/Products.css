@@ -43,16 +43,7 @@ body {
     color: white;
     margin: 0; 
 }
-/* .categories {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-.category {
-    text-decoration: none;
-    color: #000;
-    text-align: center;
-}*/
+
 .category {
     display: flex; 
     justify-content: space-evenly; 

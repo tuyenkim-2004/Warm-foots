@@ -49,50 +49,8 @@
 
 
         <?php require_once "./app/views/admin/{$data['admin']}.php"; ?>
-        <!-- <div class="right">
-            <button class="add-product" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal"><a href="#">Add Product</a></button>
-            <table class="table table-striped w-100">
-                <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Brand</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> <img src="public/imgs/BootsforEveryOccasion/BreathableMeshSlip-Ons.webp" alt="Image Product" class="image"> </td>
-                        <td>Product Name</td>
-                        <td>$ 500</td>
-                        <td>50</td>
-                        <td>Goocies</td>
-                        <td>
-                            <div class="action">
-                                <a href="#"><img src="public/imgs/icon-delete.svg" alt="Icon delete" class="delete"></a>
-                                <button class="edit" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal"><a href="#"> <img src="public/imgs/icon-edit.svg" alt="Icon edit"></a></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                
-            </table>
-        </div> -->
     </div>
-
-
-
-
-
-
-    <script src="public/js/LayoutAdmin.js">
-
-    </script>
-
-
-
+    <script src="public/js/LayoutAdmin.js"> </script>
 </body>
 
 </html>

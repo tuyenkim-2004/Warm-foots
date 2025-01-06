@@ -8,8 +8,6 @@ class ProductModel extends Database
         if (!$results) {
             return []; 
         }
-    
-        // Lấy tất cả các hàng
         $productList = [];
         while ($row = $this->fetch($results)) {
             $productList[] = $row; 
@@ -17,8 +15,6 @@ class ProductModel extends Database
         
         return $productList;
     }
-
-    // Lấy 3 sản phẩm đầu tiên
     public function get3Products()
     {
         $results = $this->query("SELECT * FROM products LIMIT 3");
@@ -33,7 +29,6 @@ class ProductModel extends Database
         return $productList;
     }
 
-    // Lấy sản phẩm theo ID
     public function getProductById($id)
     {
         $stmt = $this->prepare("SELECT * FROM products WHERE product_id = ?");
@@ -60,14 +55,11 @@ class ProductModel extends Database
 
     public function deleteProduct($id)
     {
-        // Bước 1: Xóa các bản ghi trong cart_details
         $deleteCartDetails = "DELETE FROM cart_details WHERE product_id = $id";
         if (!mysqli_query($this->con, $deleteCartDetails)) {
             echo "Lỗi khi xóa bản ghi trong bảng cart_details: " . mysqli_error($this->con);
             return false;
         }
-
-        // Bước 2: Xóa sản phẩm
         $deleteProduct = "DELETE FROM products WHERE product_id = $id";
         if (!mysqli_query($this->con, $deleteProduct)) {
             echo "Lỗi khi xóa sản phẩm: " . mysqli_error($this->con);
@@ -82,7 +74,6 @@ class ProductModel extends Database
         $result = $this->query("SELECT COUNT(*) as count FROM products");
         return $result ? $result->fetch_assoc()["count"] : 0; 
     }
-    ///loc sản phẩm
     public function filterByCategory($category_id) {
         $sql = "SELECT * FROM products WHERE category_id = ?";
         $stmt = $this->con->prepare($sql);
@@ -100,9 +91,7 @@ class ProductModel extends Database
         $stmt = $this->con->query("SELECT * FROM products");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public function getProductDetails($productID) {
-        // Truy vấn SQL
         $sql = "SELECT p.*, c.name AS name 
                 FROM products p
                 JOIN categories c ON p.category_id = c.category_id

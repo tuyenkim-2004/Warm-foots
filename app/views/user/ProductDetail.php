@@ -69,7 +69,7 @@ $_SESSION['quantity'] = $quantity;
                             <input type="hidden" name="price" id="hidden-quantity" value="<?php echo $quantity; ?>">
                             <button type="submit" class="cart">ADD TO CART</button>
                         </form>
-                        <button class="checkout">BUY IT NOW</button>
+                        <!-- <button class="checkout">BUY IT NOW</button> -->
 
                     </div>
                     <div class="type-for-product">

@@ -5,10 +5,8 @@ class UserProfileModel extends Database
 
     public function __construct()
     {
-        parent::__construct(); // Gọi hàm khởi tạo của lớp cha
+        parent::__construct(); 
     }
-
-    // Tải thông tin người dùng từ cơ sở dữ liệu
     public function loadUserProfile()
     {
         if (isset($_SESSION["user_id"])) {
@@ -26,7 +24,6 @@ class UserProfileModel extends Database
         }
     }
 
-    // Cập nhật thông tin người dùng
     public function updateUserProfile($name, $password)
     {
         if (!isset($_SESSION['user_id'])) {
