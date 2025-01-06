@@ -21,6 +21,12 @@
             </div>
             <div class="menu" id="menu">
                 <div class="menu-item">
+                    <a href="AdminController/showChart" class="menu-item-detail">
+                        <img src="public/imgs/icon-user.svg" alt="Icon User">
+                        <div>Dashboard</div>
+                    </a>
+                </div>
+                <div class="menu-item">
                     <a href="AdminController/ManageUsers" class="menu-item-detail">
                         <img src="public/imgs/icon-user.svg" alt="Icon User">
                         <div>Manage User</div>

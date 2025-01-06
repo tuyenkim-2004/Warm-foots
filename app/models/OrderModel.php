@@ -82,11 +82,11 @@ class OrderModel extends Database {
         }
     }
 
-
-    public function getOrders()
+    public function getOrders($page = 1, $limit = 4)
     {
+        $offset = ($page - 1) * $limit;
         $sql = "
-            SELECT 
+        SELECT 
             o.order_id,
             u.user_name,
             o.order_date,
@@ -105,8 +105,9 @@ class OrderModel extends Database {
         JOIN 
             products p ON od.product_id = p.product_id
         ORDER BY 
-            o.order_date DESC;
-        ";
+            o.order_date DESC
+        LIMIT $limit OFFSET $offset;
+    ";
 
         $result = $this->con->query($sql);
         $orders = [];
@@ -117,6 +118,13 @@ class OrderModel extends Database {
             $result->free();
         }
         return $orders;
+    }
+
+    public function getTotalOrders()
+    {
+        $result = $this->con->query("SELECT COUNT(*) as total FROM orders");
+        $row = $result->fetch_assoc();
+        return $row['total'];
     }
 
     public function updateOrderStatus($order_id, $status)
@@ -141,6 +149,70 @@ class OrderModel extends Database {
         $result = $stmtOrder->execute();
         $stmtOrder->close();
         return $result;
+    }
+
+    public function searchOrdersByBuyerName($buyerName)
+    {
+        $sql = "
+        SELECT 
+            o.order_id,
+            u.user_name,
+            o.order_date,
+            p.img_url,
+            p.product_name,
+            od.quantity,
+            o.total_amount,
+            o.shipping_address,
+            o.status
+        FROM 
+            orders o
+        JOIN 
+            users u ON o.user_id = u.user_id
+        JOIN 
+            order_details od ON o.order_id = od.order_id
+        JOIN 
+            products p ON od.product_id = p.product_id
+        WHERE 
+            u.user_name LIKE ?
+        ORDER BY 
+            o.order_date DESC";
+
+        $stmt = $this->con->prepare($sql);
+        $searchTerm = '%' . $buyerName . '%';
+        $stmt->bind_param('s', $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getBestSellingProducts()
+    {
+        $sql = "
+        SELECT 
+            p.product_name,
+            SUM(od.quantity) AS total_quantity
+        FROM 
+            orders o
+        JOIN 
+            order_details od ON o.order_id = od.order_id
+        JOIN 
+            products p ON od.product_id = p.product_id
+        GROUP BY 
+            p.product_name
+        ORDER BY 
+            total_quantity DESC
+        LIMIT 10; -- Lấy 10 sản phẩm bán chạy nhất
+    ";
+
+        $result = $this->con->query($sql);
+        $bestSellingProducts = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $bestSellingProducts[] = $row;
+            }
+            $result->free();
+        }
+        return $bestSellingProducts;
     }
 }
 

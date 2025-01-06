@@ -115,7 +115,7 @@
                                         } else {
                                             echo '<img src="public/imgs/default-image" alt="Default Image" class="image">';
                                         }
-                                    ?>           
+                                    ?>
                                 </a>
                             </div>
                             <div class="item_list">
