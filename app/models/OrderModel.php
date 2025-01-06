@@ -213,6 +213,7 @@ class OrderModel extends Database {
             $result->free();
         }
         return $bestSellingProducts;
+    }
     public function getOrderById($orderId) {
         $sql = "
             SELECT 
