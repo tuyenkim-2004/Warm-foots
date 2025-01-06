@@ -15,19 +15,37 @@ class AdminController extends Controller
 
     public function manageUsers()
     {
-        $userList = $this->loadModel('UserModel')->getListUser();
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 6; 
+        $userModel = $this->loadModel('UserModel');
+        $userList = $userModel->getListUser($page, $limit);
+        $totalUsers = $userModel->getTotalUsers();
+        $totalPages = ceil($totalUsers / $limit);
         $this->view('LayoutAdmin', [
             "admin" => "ManageUsers",
-            'userList' => $userList
+            'userList' => $userList,
+            'totalPages' => $totalPages,
+            'currentPage' => $page,
+            'resultsPerPage' => $limit
         ]);
     }
 
     public function manageProducts()
     {
-        $productList = $this->loadModel('ProductModel')->getProductList();
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $resultsPerPage = 4;
+        
+        $data = $this->loadModel('ProductModel')->getProductList($currentPage, $resultsPerPage);
+        
         $this->view('LayoutAdmin', [
             "admin" => "ManageProducts",
-            "productList" => $productList
+            "productList" => $data['productList'],
+            "totalProducts" => $data['totalProducts'],
+            "currentPage" => $currentPage,
+            "resultsPerPage" => $resultsPerPage,
         ]);
     }
 
@@ -42,7 +60,7 @@ class AdminController extends Controller
             $userModel = $this->loadModel("UserModel");
             $result = $userModel->addUser($name, $password, $email, $role);
 
-            $this->handleResponse($result, 'Thêm người dùng thành công.', '/AdminController/manageUsers', 'Thêm thất bại. Vui lòng thử lại.');
+            $this->handleResponse($result, 'Thêm người dùng thành công.', 'AdminController/ManageUsers', 'Thêm thất bại. Vui lòng thử lại.');
         }
     }
 
@@ -185,12 +203,21 @@ class AdminController extends Controller
 
     public function manageOrders()
     {
-        $orderList = $this->model("OrderModel")->getOrders();
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 4; 
+        $orderModel = $this->loadModel('OrderModel');
+        $orderList = $orderModel->getOrders($page, $limit);
+        $totalOrders = $orderModel->getTotalOrders();
+        $totalPages = ceil($totalOrders / $limit);
         $this->view('LayoutAdmin', [
             'admin' => 'ManageOrders',
-            'orders' => $orderList
+            'orders' => $orderList,
+            'totalPages' => $totalPages,
+            'currentPage' => $page,
+            'resultsPerPage' => $limit
         ]);
     }
+
 
     public function updateOrder()
     {
@@ -214,5 +241,62 @@ class AdminController extends Controller
             $this->manageOrders();
         }
     }
-   
+
+
+    public function searchProduct()
+    {
+        $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
+        $productModel = $this->loadModel('ProductModel');
+        $result = $productModel->searchProducts($searchQuery);
+        $data = [
+                "admin" => "ManageProducts",
+                "productList" => $result, 
+            ];
+        if (empty($result)) {
+            $data["message"] = "Không tìm thấy sản phẩm nào khớp với từ khóa.";
+        }
+        $this->view('LayoutAdmin', $data);
+    }
+
+    public function searchUsers()
+    {
+        $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
+        $userList = $this->loadModel('UserModel')->searchUsers($searchQuery);
+        $data = [
+            "admin" => "ManageUsers",
+            "userList" => $userList        
+        ];
+        $this->view('LayoutAdmin', $data);
+
+    }
+
+
+    public function searchOrders()
+    {
+        $buyerName = isset($_GET['buyer_name']) ? trim($_GET['buyer_name']) : '';
+        $orders = $this->loadModel('OrderModel')->searchOrdersByBuyerName($buyerName);
+        $data = [
+            'admin' => 'ManageOrders',
+            'orders' => $orders
+        ];
+        if (empty($result)) {
+            $data["message"] = "Không tìm thấy sản phẩm nào khớp với từ khóa.";
+        }
+        $this->view('LayoutAdmin', $data);
+    }
+
+    public function showChart()
+    {
+        $products = $this->model("OrderModel")->getBestSellingProducts();
+        // Kiểm tra dữ liệu
+        if (empty($products)) {
+            echo "Không có sản phẩm nào được bán.";
+            return; 
+        }
+
+        $this->view('LayoutAdmin', [
+            'admin' => 'DashBoard',
+            'products' => $products
+        ]);
+    }
 }

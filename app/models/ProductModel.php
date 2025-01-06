@@ -2,19 +2,37 @@
 
 class ProductModel extends Database
 {
-    public function getProductList()
+
+    public function getProductList($currentPage = 1, $resultsPerPage = 4)
     {
-        $results = $this->query("SELECT * FROM products");
-        if (!$results) {
-            return []; 
+        $startingLimit = ($currentPage - 1) * $resultsPerPage;
+
+        $totalResults = $this->query("SELECT COUNT(*) as total FROM products");
+
+        $totalRow = $this->fetch($totalResults);
+
+        if ($totalRow) {
+            $totalProducts = (int)$totalRow['total'];
+        } else {
+            $totalProducts = 0; 
         }
+        $results = $this->query("SELECT * FROM products LIMIT $startingLimit, $resultsPerPage");
+
+        if (!$results) {
+            return [];
+        }
+
         $productList = [];
         while ($row = $this->fetch($results)) {
-            $productList[] = $row; 
+            $productList[] = $row;
         }
-        
-        return $productList;
+
+        return [
+            'productList' => $productList,
+            'totalProducts' => $totalProducts, 
+        ];
     }
+
     public function get3Products()
     {
         $results = $this->query("SELECT * FROM products LIMIT 3");
@@ -74,6 +92,7 @@ class ProductModel extends Database
         $result = $this->query("SELECT COUNT(*) as count FROM products");
         return $result ? $result->fetch_assoc()["count"] : 0; 
     }
+
     public function filterByCategory($category_id) {
         $sql = "SELECT * FROM products WHERE category_id = ?";
         $stmt = $this->con->prepare($sql);
@@ -89,7 +108,14 @@ class ProductModel extends Database
 
     public function getAllProducts() {
         $stmt = $this->con->query("SELECT * FROM products");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->con->prepare($stmt);
+        if (!$stmt) {
+            die("Prepare failed: " . $this->con->error);
+        }
+        $stmt->bind_param("i", $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
     public function getProductDetails($productID) {
         $sql = "SELECT p.*, c.name AS name 
@@ -126,5 +152,26 @@ class ProductModel extends Database
         }
         return $data; 
     }
+
+    public function search ($keyword)
+    {
+        $data = [];
+        $sql = "SELECT * FROM products WHERE product_name LIKE ?";
+        $stmt = $this->con->prepare($sql);
+
+        $searchTerm = '%' . $keyword . '%';
+        $stmt->bind_param('s', $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+        $stmt->close();
+
+        return $data;
+    }
+
+    
+
 }
 ?>

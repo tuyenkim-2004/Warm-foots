@@ -40,17 +40,28 @@
         return $result;
     }
 
-    public function getListUser(){
-        $results = $this->query("SELECT * FROM users");
+    public function getListUser($page = 1, $limit = 6)
+    {
+        $offset = ($page - 1) * $limit;
+        $results = $this->con->query("SELECT * FROM users LIMIT $limit OFFSET $offset");
+
         if (!$results) {
             return [];
         }
+
         $userList = [];
-        while ($row = $this->fetch($results)) {
+        while ($row = $results->fetch_assoc()) {
             $userList[] = $row;
         }
 
         return $userList;
+    }
+
+    public function getTotalUsers()
+    {
+        $result = $this->con->query("SELECT COUNT(*) as total FROM users");
+        $row = $result->fetch_assoc();
+        return $row['total'];
     }
 
 
@@ -90,5 +101,15 @@
             return false; 
         }
     }
-    
+
+    public function searchUsers($searchQuery)
+    {
+        $sql = "SELECT * FROM users WHERE user_name LIKE ?";
+        $stmt = $this->con->prepare($sql);
+        $searchTerm = '%' . $searchQuery . '%';
+        $stmt->bind_param('s', $searchTerm);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

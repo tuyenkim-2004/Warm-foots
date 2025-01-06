@@ -10,7 +10,13 @@
         unset($_SESSION['error']);
     }
     ?>
-    <button class="add-user" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+    <div class="content-action d-flex justify-content-between align-items-center mb-3">
+        <button class="add-user" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+        <form method="GET" action="./AdminController/searchUsers">
+            <input type="text" name="search" class="form-control" placeholder="Search User" style="width: 100%;"
+                value="<?php echo isset($_GET['search']) ? '' : ''; ?>">
+        </form>
+    </div>
     <table class="table table-striped w-100">
         <thead>
             <tr>
@@ -43,13 +49,38 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <?php if ($data['currentPage'] > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="AdminController/ManageUsers?page=<?php echo $data['currentPage'] - 1; ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; Previous</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $data['totalPages']; $i++): ?>
+                <li class="page-item <?php echo ($i == $data['currentPage']) ? 'active' : ''; ?>">
+                    <a class="page-link" href="AdminController/ManageUsers?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <?php if ($data['currentPage'] < $data['totalPages']): ?>
+                <li class="page-item">
+                    <a class="page-link" href="AdminController/ManageUsers?page=<?php echo $data['currentPage'] + 1; ?>" aria-label="Next">
+                        <span aria-hidden="true"> Next &raquo;</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </div>
 <script></script>
 <div class="modal" id="addUserModal">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Create User</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
