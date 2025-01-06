@@ -47,7 +47,6 @@ class ProductModel extends Database
         return $productList;
     }
 
-    
     public function getProductById($id)
     {
         $stmt = $this->prepare("SELECT * FROM products WHERE product_id = ?");
@@ -118,9 +117,7 @@ class ProductModel extends Database
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
-
     public function getProductDetails($productID) {
-        // Truy vấn SQL
         $sql = "SELECT p.*, c.name AS name 
                 FROM products p
                 JOIN categories c ON p.category_id = c.category_id

@@ -28,7 +28,6 @@ class ShoppingCartController extends Controller {
             $result = $CartModel->addProductToCart($productId, $quantity);
             
             if ($result) {
-                // Lưu thông báo vào session
                 $_SESSION['message'] = "Sản phẩm đã được thêm vào giỏ hàng!";
             } else {
                 $_SESSION['message'] = "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.";
@@ -101,10 +100,7 @@ class ShoppingCartController extends Controller {
         }
     }
     public function getTotalPrice() {
-        // Khởi tạo model
         $cartModel = $this->model('CartModel');
-    
-        // Lấy thông tin chi tiết giỏ hàng
         $cartDetails = $cartModel->getCartDetails();
     
         // Tính tổng giá trị giỏ hàng
