@@ -3,7 +3,7 @@
 class ProductModel extends Database
 {
 
-    public function getProductList($currentPage = 1, $resultsPerPage = 4)
+    public function getProductListAdmin($currentPage = 1, $resultsPerPage = 4)
     {
         $startingLimit = ($currentPage - 1) * $resultsPerPage;
 
@@ -33,6 +33,21 @@ class ProductModel extends Database
         ];
     }
 
+
+    public function getProductList()
+    {
+        $results = $this->query("SELECT * FROM products");
+        if (!$results) {
+            return [];
+        }
+
+        $productList = [];
+        while ($row = $this->fetch($results)) {
+            $productList[] = $row;
+        }
+
+        return $productList;
+    }
     public function get3Products()
     {
         $results = $this->query("SELECT * FROM products LIMIT 3");

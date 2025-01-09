@@ -104,17 +104,17 @@
                             <div class="image">
                                 <a href="ProductController/detail?id=<?php echo $product['product_id']; ?>">
                                     <?php
-                                        $imageName = trim(htmlspecialchars($product['img_url']));
-                                        if (ctype_digit(substr($imageName, 0, 1))) {
-                                            $imagePath = "public/imgs/$imageName";
-                                        } else {
-                                            $imagePath = "public/imgs/$imageName.webp";
-                                        }
-                                        if (file_exists($imagePath)) {
-                                            echo '<img src="' . $imagePath . '" alt="Image Product" class="image">';
-                                        } else {
-                                            echo '<img src="public/imgs/default-image" alt="Default Image" class="image">';
-                                        }
+                                    $imageName = trim(htmlspecialchars($product['img_url']));
+                                    if (ctype_digit(substr($imageName, 0, 1))) {
+                                        $imagePath = "public/imgs/$imageName";
+                                    } else {
+                                        $imagePath = "public/imgs/$imageName.webp";
+                                    }
+                                    if (file_exists($imagePath)) {
+                                        echo '<img src="' . $imagePath . '" alt="Image Product" class="image">';
+                                    } else {
+                                        echo '<img src="public/imgs/default-image" alt="Default Image" class="image">';
+                                    }
                                     ?>
                                 </a>
                             </div>
@@ -135,7 +135,6 @@
                                     <input type="hidden" name="quantity" value="1">
                                     <button type="submit" class="add-to-cart">Add to Cart</button>
                                 </form>
-                                <!-- <button class="buy-now"> Buy Now</button> -->
                                 <form method="POST" action="./OrderController/buyNow">
                                     <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
                                     <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['product_name']); ?>">

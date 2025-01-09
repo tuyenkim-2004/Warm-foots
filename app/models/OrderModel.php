@@ -82,7 +82,7 @@ class OrderModel extends Database {
         }
     }
 
-    public function getOrders($page = 1, $limit = 4)
+    public function getOrdersAdmin($page = 1, $limit = 4)
     {
         $offset = ($page - 1) * $limit;
         $sql = "
@@ -108,6 +108,43 @@ class OrderModel extends Database {
             o.order_date DESC
         LIMIT $limit OFFSET $offset;
     ";
+
+        $result = $this->con->query($sql);
+        $orders = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $orders[] = $row;
+            }
+            $result->free();
+        }
+        return $orders;
+    }
+
+
+    public function getOrders()
+    {
+        $sql = "
+            SELECT 
+            o.order_id,
+            u.user_name,
+            o.order_date,
+            p.img_url,
+            p.product_name,
+            od.quantity,
+            o.total_amount,
+            o.shipping_address,
+            o.status
+        FROM 
+            orders o
+        JOIN 
+            users u ON o.user_id = u.user_id
+        JOIN 
+            order_details od ON o.order_id = od.order_id
+        JOIN 
+            products p ON od.product_id = p.product_id
+        ORDER BY 
+            o.order_date DESC;
+        ";
 
         $result = $this->con->query($sql);
         $orders = [];

@@ -16,7 +16,6 @@
 
 <script>
     const products = <?php echo json_encode($data['products']); ?>;
-
     const labels = products.map(product => product.product_name);
     const data = products.map(product => product.total_quantity);
 

@@ -38,7 +38,7 @@ class AdminController extends Controller
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $resultsPerPage = 4;
         
-        $data = $this->loadModel('ProductModel')->getProductList($currentPage, $resultsPerPage);
+        $data = $this->loadModel('ProductModel')->getProductListAdmin($currentPage, $resultsPerPage);
         
         $this->view('LayoutAdmin', [
             "admin" => "ManageProducts",
@@ -206,7 +206,7 @@ class AdminController extends Controller
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 4; 
         $orderModel = $this->loadModel('OrderModel');
-        $orderList = $orderModel->getOrders($page, $limit);
+        $orderList = $orderModel->getOrdersAdmin($page, $limit);
         $totalOrders = $orderModel->getTotalOrders();
         $totalPages = ceil($totalOrders / $limit);
         $this->view('LayoutAdmin', [
