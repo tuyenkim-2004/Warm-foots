@@ -1,0 +1,160 @@
+.payment-container {
+    display: flex;
+    justify-content: row;
+    justify-content: center;
+    gap: 50px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.title-payment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.order_form{
+    display: flex;
+    flex-direction:row; 
+    gap: 50px; 
+   
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+
+.form input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.form label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.frm-item {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    position: relative; 
+}
+
+.img {
+    flex: 1;
+    max-width: 100px;
+    position: relative; 
+}
+
+.img img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.quantity-overlay {
+    position: absolute;
+    background-color: rgba(18, 2, 2, 0.5); 
+    color: white;
+    padding: 5px;
+    border-radius: 60%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.title {
+    padding-left: 10px;
+}
+
+.title p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.price {
+    flex: 1;
+    text-align: right;
+    padding-left: 10px;
+}
+
+.price p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.total-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+.total-item>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+
+}
+
+.total-item .Total p:last-child {
+    font-weight: bold;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.submit-btn {
+    padding: 12px 24px;
+    background-color: #ae3f4f;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: 70%;
+    margin-bottom: 10px;
+
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+i {
+    color: #ae3f4f;
+}

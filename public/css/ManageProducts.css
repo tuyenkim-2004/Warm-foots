@@ -1,0 +1,95 @@
+.right{
+    width: 80%;
+    margin: 60px;
+}
+
+
+
+/* product manahgement */
+tr{
+  width: 100%;
+}
+
+.image{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+table{
+    text-align: center;
+}
+
+th, td {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+}
+
+
+.add-product {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ae3f4f;
+    color: white;
+    margin-bottom: 10px;
+}
+
+
+
+.add-product:hover{
+    background-color: green;
+    color: white;
+}
+
+
+
+
+
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.info-detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+label{
+    width: 150px;
+    color: #6a6263;
+}
+input{
+    width: 100%;
+    height: 45px;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 20px;
+    border: 1px solid #ece7e7;
+}
+
+.create-product{
+    border: none;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: green;
+}
+
+.create-product a{
+    color: white;
+    text-decoration: none;
+}
+
+.edit{
+    border: none;
+}
+

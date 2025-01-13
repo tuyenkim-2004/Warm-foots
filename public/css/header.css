@@ -1,0 +1,151 @@
+/* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .top-bar {
+    padding: 5px 0;
+    font-size: 15px;
+    margin-left: 30px;
+    margin-bottom: -20px;
+    display: flex;
+  }
+  
+  .logReg{
+    margin-left: 1500px;
+    padding: 15px 0;
+    text-decoration: none;
+  }
+  .navbars {
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    padding: 15px 30px !important;
+  }
+  
+  .logo-icon {
+    width: 300px;
+    height: auto;
+  }
+  
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin-right: 100px;
+    margin-block: 20px;
+  }
+  
+  .nav-menu li {
+    display: inline;
+  }
+  
+  .nav-menu a {
+    text-decoration: none !important;
+    color: #000;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  
+  .nav-menu a:hover {
+    color: #007bff;
+  }
+  
+  
+  .login-register {
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .login-register:hover {
+    color: #007bff;
+  }
+  
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 70px;
+  }
+  
+  .icons a {
+    text-decoration: none;
+    color: #000;
+    font-size: 30px;
+  }
+  
+  .icons a:hover {
+    color: #007bff;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.dropdown-toggle {
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none; 
+    position: absolute;
+    top: 40px;  
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  outline: none;
+  transition: box-shadow 0.3s, background-color 0.3s;
+  width: 200px;
+}
+
+
